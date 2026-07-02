@@ -1,5 +1,6 @@
 import subprocess
 
+
 def run(command):
     result = subprocess.run(
         command,
@@ -8,9 +9,6 @@ def run(command):
         text=True
     )
 
-    if result.stdout:
-        print(result.stdout)
-
     if result.returncode != 0:
         raise Exception(result.stderr)
 
@@ -18,6 +16,13 @@ def run(command):
 
 
 def commit_and_push(message):
+
     run("git add .")
+
     run(f'git commit -m "{message}"')
+
     run("git push origin main")
+
+    sha = run("git rev-parse HEAD")
+
+    return sha

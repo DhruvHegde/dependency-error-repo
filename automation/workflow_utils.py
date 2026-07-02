@@ -19,45 +19,41 @@ def run(command):
     return result.stdout
 
 
-def get_latest_run():
+def get_runs():
 
-    command = (
+    cmd = (
         "gh run list "
-        "--limit 1 "
-        "--json databaseId,status,conclusion"
+        "--limit 20 "
+        "--json databaseId,headSha,status,conclusion"
     )
 
-    output = run(command)
+    output = run(cmd)
 
-    data = json.loads(output)
-
-    if not data:
-        return None
-
-    return data[0]
+    return json.loads(output)
 
 
-def wait_for_completion():
+def wait_for_run(commit_sha):
 
     waited = 0
 
     while waited < MAX_WAIT:
 
-        run_info = get_latest_run()
+        runs = get_runs()
 
-        if run_info is None:
-            time.sleep(POLL_INTERVAL)
-            waited += POLL_INTERVAL
-            continue
+        for workflow in runs:
 
-        status = run_info["status"]
+            if workflow["headSha"] == commit_sha:
 
-        print(f"Workflow status: {status}")
+                print(
+                    f"Found workflow {workflow['databaseId']} "
+                    f"Status: {workflow['status']}"
+                )
 
-        if status == "completed":
-            return run_info
+                if workflow["status"] == "completed":
+                    return workflow
 
         time.sleep(POLL_INTERVAL)
+
         waited += POLL_INTERVAL
 
-    raise TimeoutError("Workflow did not finish within the timeout.")
+    raise TimeoutError("Workflow not found.")

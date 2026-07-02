@@ -34,9 +34,11 @@ def main():
 
     update_requirements(package)
 
-    commit_and_push(
-        f"Dependency Error Run {current+1}"
-    )
+    sha = commit_and_push(
+    f"Dependency Error Run {current+1}"
+)
+
+    print("Commit SHA:", sha)
 
     state["current_run"] += 1
     state["last_dependency"] = package
