@@ -8,4 +8,6 @@ STAGE = "build"
 
 TOTAL_RUNS = 10
 
+LOG_FOLDER = "logs/F2"
+
 WAIT_SECONDS = 10
