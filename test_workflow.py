@@ -1,5 +1,10 @@
-from automation.workflow_utils import wait_for_completion
+from automation.git_utils import commit_and_push
+from automation.workflow_utils import wait_for_run
 
-run = wait_for_completion()
+sha = commit_and_push("Workflow detection test")
 
-print(run)
+print("Commit:", sha)
+
+workflow = wait_for_run(sha)
+
+print(workflow)
