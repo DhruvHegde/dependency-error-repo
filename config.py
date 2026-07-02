@@ -1,11 +1,11 @@
-REPO_NAME = "dependency-error-repo"
-
-FAILURE_TYPE = "F2"
-
-STAGE = "build"
-
 REPO_OWNER = "DhruvHegde"
+REPO_NAME = "dependency-error-repo"
 
 WORKFLOW_NAME = "Dependency Error Dataset"
 
-WAIT_SECONDS = 15
+FAILURE_TYPE = "F2"
+STAGE = "build"
+
+TOTAL_RUNS = 10
+
+WAIT_SECONDS = 10

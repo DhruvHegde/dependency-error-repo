@@ -8,8 +8,11 @@ def run(command):
         text=True
     )
 
+    if result.stdout:
+        print(result.stdout)
+
     if result.returncode != 0:
-        print(result.stderr)
+        raise Exception(result.stderr)
 
     return result.stdout.strip()
 
@@ -17,4 +20,4 @@ def run(command):
 def commit_and_push(message):
     run("git add .")
     run(f'git commit -m "{message}"')
-    run("git push")
+    run("git push origin main")
