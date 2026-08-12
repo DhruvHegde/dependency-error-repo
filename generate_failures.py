@@ -44,7 +44,7 @@ def main():
         workflow = wait_for_run(sha)
         print(f"Workflow completed: {workflow['databaseId']}")
 
-        log_path = download_workflow_log(workflow, current)
+        log_path = download_workflow_log(workflow, current+1)
         print(f"Downloaded log: {log_path}")
 
         state["current_run"] += 1
