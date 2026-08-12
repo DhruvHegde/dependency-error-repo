@@ -2,9 +2,11 @@ from numpy import rint
 
 from automation.git_utils import commit_and_push
 from automation.log_utils import download_workflow_log
+from automation.metadata_utils import save_metadata
 from automation.state_utils import load_state, save_state
 from automation.validator import validate_workflow_log_file
 from automation.workflow_utils import wait_for_run
+from datetime import datetime
 
 from config import TOTAL_RUNS
 
@@ -73,6 +75,31 @@ def main():
             else:
                 print(f"Validation failed: log does not contain a known dependency error pattern: {log_path}")
             print("Current run failed validation and state was not advanced.")
+            return
+
+        metadata = {
+            "run_number": current + 1,
+            "dependency": package,
+            "commit_sha": sha,
+            "workflow_id": workflow["databaseId"],
+            "workflow_status": workflow["status"],
+            "workflow_conclusion": workflow.get("conclusion"),
+            "log_file": log_path,
+            "validation_status": validation["status"],
+            "is_dependency_error": validation["is_dependency_error"],
+            "matched_pattern": validation["matched_pattern"],
+            "matched_line": validation["matched_line"],
+            "timestamp": datetime.utcnow().isoformat() + "Z"
+        }
+
+        metadata_path = f"metadata/F2/run_{(current + 1):04d}.json"
+
+        try:
+            save_metadata(metadata_path, metadata)
+            print(f"Saved metadata: {metadata_path}")
+        except Exception as metadata_exc:
+            print(f"Metadata write failed for run {current + 1}: {metadata_exc}")
+            print("Current run failed metadata persistence and state was not advanced.")
             return
 
         state["current_run"] += 1
