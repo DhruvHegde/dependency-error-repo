@@ -1,6 +1,7 @@
 from numpy import rint
 
 from automation.git_utils import commit_and_push
+from automation.label_utils import append_label_record
 from automation.log_utils import download_workflow_log
 from automation.metadata_utils import save_metadata
 from automation.state_utils import load_state, save_state
@@ -8,7 +9,7 @@ from automation.validator import validate_workflow_log_file
 from automation.workflow_utils import wait_for_run
 from datetime import datetime
 
-from config import TOTAL_RUNS
+from config import FAILURE_TYPE, REPO_NAME, STAGE, TOTAL_RUNS
 
 
 def load_dependencies():
@@ -100,6 +101,33 @@ def main():
         except Exception as metadata_exc:
             print(f"Metadata write failed for run {current + 1}: {metadata_exc}")
             print("Current run failed metadata persistence and state was not advanced.")
+            return
+
+        label_record = {
+            "run_number": current + 1,
+            "dependency": package,
+            "repository": REPO_NAME,
+            "commit_sha": sha,
+            "workflow_id": workflow["databaseId"],
+            "workflow_conclusion": workflow.get("conclusion"),
+            "failure_type": FAILURE_TYPE,
+            "stage": STAGE,
+            "validation_status": validation["status"],
+            "matched_pattern": validation["matched_pattern"],
+            "log_file": log_path,
+            "metadata_file": metadata_path,
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+        }
+
+        try:
+            inserted = append_label_record("labels.csv", label_record)
+            if inserted:
+                print(f"Appended label row for run {current + 1} to labels.csv")
+            else:
+                print(f"Label row for run {current + 1} already exists in labels.csv")
+        except Exception as label_exc:
+            print(f"Label write failed for run {current + 1}: {label_exc}")
+            print("Current run failed label persistence and state was not advanced.")
             return
 
         state["current_run"] += 1
