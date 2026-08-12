@@ -1,3 +1,5 @@
+from numpy import rint
+
 from automation.git_utils import commit_and_push
 from automation.log_utils import download_workflow_log
 from automation.state_utils import load_state, save_state
@@ -33,6 +35,9 @@ def main():
         print("Dataset generation complete.")
         return
 
+    dependencies = load_dependencies()
+    print(dependencies)
+    print("Current index:", current)
     package = dependencies[current % len(dependencies)]
 
     print(f"Run {current+1}")
@@ -73,11 +78,16 @@ def main():
         state["current_run"] += 1
         state["last_dependency"] = package
         save_state(state)
-
     except Exception as exc:
-        print(f"Error during dependency run {current+1}: {exc}")
-        print("Current run failed and state was not advanced.")
-        return
+        print("Exception type:", type(exc))
+        print("Exception repr:", repr(exc))
+        print("Exception str:", str(exc))
+        raise
+
+    # except Exception as exc:
+    #     print(f"Error during dependency run {current+1}: {exc}")
+    #     print("Current run failed and state was not advanced.")
+    #     return
 
 
 if __name__ == "__main__":
