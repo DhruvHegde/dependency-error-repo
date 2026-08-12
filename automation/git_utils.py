@@ -21,7 +21,8 @@ def commit_and_push(message):
 
     run(f'git commit -m "{message}"')
 
-    run("git push origin main")
+    branch = run("git branch --show-current")
+    run(f"git push origin {branch}")
 
     sha = run("git rev-parse HEAD")
 
