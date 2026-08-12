@@ -9,7 +9,11 @@ from config import TOTAL_RUNS
 
 def load_dependencies():
     with open("dependency_errors.txt") as f:
-        return [x.strip() for x in f if x.strip()]
+        return [
+            line.strip()
+            for line in f
+            if line.strip() and not line.strip().startswith("#")
+        ]
 
 
 def update_requirements(package):
