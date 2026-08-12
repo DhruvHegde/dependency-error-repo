@@ -1,10 +1,30 @@
+# Non-existent packages
 fake_library_001
+fake_library_002
 nonexistentpackage123
+abcxyzpackage
+
+# Impossible versions
 requests==999.0.0
 numpy==999.0.0
 pandas==999.0.0
-tensorflow==999.0.0
 scipy==999.0.0
-opencv-python==999.0.0
-torch==999.0.0
-abcxyzpackage
+tensorflow==999.0.0
+
+# Invalid version syntax
+numpy===1.0
+requests=>=abc
+pandas==invalid
+
+# Python incompatibility
+dataclasses==0.8
+
+# Typos
+numppy
+panads
+reqests
+pytesst
+
+# Old impossible versions
+flask==0.0.0
+django==99.99.99

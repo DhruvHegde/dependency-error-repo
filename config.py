@@ -10,6 +10,7 @@ STAGE = "build"
 TOTAL_RUNS = 10
 
 LOG_FOLDER = "logs/F2"
+METADATA_FOLDER = "metadata/F2"
 
 POLL_INTERVAL = 5
 MAX_WAIT = 300
