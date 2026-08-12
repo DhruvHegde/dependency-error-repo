@@ -4,11 +4,11 @@ from pathlib import Path
 
 
 DEPENDENCY_PATTERNS = [
-    "No matching distribution found",
     "Could not find a version that satisfies the requirement",
-    "ERROR: Could not find",
+    "No matching distribution found",
     "ResolutionImpossible",
     "Invalid requirement",
+    "ERROR: Could not find",
     "Ignored the following versions"
 ]
 
