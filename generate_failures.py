@@ -1,5 +1,7 @@
 from automation.git_utils import commit_and_push
+from automation.log_utils import download_workflow_log
 from automation.state_utils import load_state, save_state
+from automation.workflow_utils import wait_for_run
 
 from config import TOTAL_RUNS
 
@@ -29,21 +31,30 @@ def main():
     package = dependencies[current % len(dependencies)]
 
     print(f"Run {current+1}")
-
     print(f"Dependency: {package}")
 
-    update_requirements(package)
+    try:
+        update_requirements(package)
 
-    sha = commit_and_push(
-    f"Dependency Error Run {current+1}"
-)
+        sha = commit_and_push(
+            f"Dependency Error Run {current+1}"
+        )
+        print("Commit SHA:", sha)
 
-    print("Commit SHA:", sha)
+        workflow = wait_for_run(sha)
+        print(f"Workflow completed: {workflow['databaseId']}")
 
-    state["current_run"] += 1
-    state["last_dependency"] = package
+        log_path = download_workflow_log(workflow, current)
+        print(f"Downloaded log: {log_path}")
 
-    save_state(state)
+        state["current_run"] += 1
+        state["last_dependency"] = package
+        save_state(state)
+
+    except Exception as exc:
+        print(f"Error during dependency run {current+1}: {exc}")
+        print("Current run failed and state was not advanced.")
+        return
 
 
 if __name__ == "__main__":
