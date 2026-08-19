@@ -1,6 +1,5 @@
 import pytest
 
-def test_index_out_of_bounds_21():
-    data = [1, 2, 3]
-    val = data[370]
-    assert val > 0
+def test_type_mismatch_22():
+    result = "string_value" + 841
+    assert result is not None
