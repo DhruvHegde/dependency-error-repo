@@ -1,6 +1,6 @@
 import pytest
 
-def test_index_out_of_bounds_3():
-    data = [1, 2, 3]
-    val = data[456]
-    assert val > 0
+def test_missing_dict_key_4():
+    config = {"timeout": 30, "retries": 3}
+    val = config["missing_key_9890"]
+    assert val == True
