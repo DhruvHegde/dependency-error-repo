@@ -1,6 +1,6 @@
 import pytest
 
-def test_missing_dict_key_120():
-    config = {"timeout": 30, "retries": 3}
-    val = config["missing_key_8787"]
-    assert val == True
+def test_assertion_mismatch_121():
+    expected = 603
+    actual = 1280
+    assert expected == actual, f"Expected {expected} but got {actual}"
