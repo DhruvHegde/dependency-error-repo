@@ -1,5 +1,5 @@
 import pytest
 
-def test_type_mismatch_136():
-    result = "string_value" + 825
+def test_type_mismatch_137():
+    result = "string_value" + 123
     assert result is not None
