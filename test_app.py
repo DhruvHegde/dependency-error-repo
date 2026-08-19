@@ -1,6 +1,6 @@
 import pytest
 
-def test_missing_dict_key_70():
+def test_missing_dict_key_71():
     config = {"timeout": 30, "retries": 3}
-    val = config["missing_key_7230"]
+    val = config["missing_key_6970"]
     assert val == True
