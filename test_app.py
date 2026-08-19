@@ -1,6 +1,5 @@
 import pytest
 
-def test_assertion_mismatch_103():
-    expected = 183
-    actual = 9841
-    assert expected == actual, f"Expected {expected} but got {actual}"
+def test_type_mismatch_104():
+    result = "string_value" + 958
+    assert result is not None
