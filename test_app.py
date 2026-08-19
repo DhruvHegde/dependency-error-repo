@@ -1,6 +1,6 @@
 import pytest
 
-def test_assertion_mismatch_37():
-    expected = 778
-    actual = 1704
+def test_assertion_mismatch_38():
+    expected = 982
+    actual = 4085
     assert expected == actual, f"Expected {expected} but got {actual}"
