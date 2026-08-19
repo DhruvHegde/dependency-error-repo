@@ -1,6 +1,5 @@
 import pytest
 
-def test_missing_dict_key_35():
-    config = {"timeout": 30, "retries": 3}
-    val = config["missing_key_2939"]
-    assert val == True
+def test_type_mismatch_36():
+    result = "string_value" + 109
+    assert result is not None
