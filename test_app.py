@@ -1,6 +1,6 @@
 import pytest
 
-def test_index_out_of_bounds_25():
+def test_index_out_of_bounds_26():
     data = [1, 2, 3]
-    val = data[997]
+    val = data[309]
     assert val > 0
