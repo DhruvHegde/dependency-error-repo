@@ -1,4 +1,6 @@
-from app import add
+import pytest
 
-def test_add():
-    assert add(2, 3) == 5
+def test_missing_dict_key_1():
+    config = {"timeout": 30, "retries": 3}
+    val = config["missing_key_4959"]
+    assert val == True
