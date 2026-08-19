@@ -40,7 +40,7 @@ from automation.git_utils import commit_and_push
 from automation.label_utils import append_label_record
 from automation.log_utils import download_workflow_log
 from automation.metadata_utils import save_metadata
-from automation.state_utils import load_state, save_state
+from automation.state_utils import save_state  # load_state unused; F1 uses _load_json
 from automation.syntax_validator import validate_syntax_log_file
 from automation.workflow_utils import wait_for_run
 
@@ -153,10 +153,10 @@ def load_f1_state():
     """Load state_f1.json, creating it with default values if absent."""
     if not Path(F1_STATE_FILE).exists():
         default = {"current_run": 0, "last_syntax_error_type": None}
-        with open(F1_STATE_FILE, "w") as f:
+        with open(F1_STATE_FILE, "w", encoding="utf-8") as f:
             json.dump(default, f, indent=4)
         return default
-    return load_state.__wrapped__(F1_STATE_FILE) if hasattr(load_state, "__wrapped__") else _load_json(F1_STATE_FILE)
+    return _load_json(F1_STATE_FILE)
 
 
 def save_f1_state(state):

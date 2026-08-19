@@ -24,7 +24,7 @@ MAX_WAIT = 300
 F1_FAILURE_TYPE = "syntax_error"
 F1_STAGE = "build"
 
-F1_TOTAL_RUNS = 5
+F1_TOTAL_RUNS = 1
 
 F1_LOG_FOLDER = "logs/F1"
 F1_METADATA_FOLDER = "metadata/F1"
