@@ -1,0 +1,31 @@
+# Syntax error scenarios for F1 dataset generation.
+#
+# Format: scenario_id|description|broken_app_py_content
+#
+# Each scenario is a COMPLETE, STANDALONE replacement for app.py.
+# The content must be genuinely syntactically broken so that
+# `python -c "import app"` raises SyntaxError, IndentationError, or TabError.
+# Each scenario is independent — the generator writes it fresh to app.py
+# before every commit, so no scenario depends on a previous one.
+#
+# Pipe characters (|) delimit fields; the content field contains escaped newlines (\n).
+
+missing_colon|Missing colon after if statement|def add(a, b):\n    return a + b\n\nif __name__ == "__main__"\n    print(add(1, 2))\n
+
+missing_paren|Unmatched opening parenthesis|def add(a, b):\n    return a + b\n\nresult = add(1, 2\nprint(result)\n
+
+missing_bracket|Unmatched opening bracket|def add(a, b):\n    return a + b\n\nvalues = [1, 2, 3\nprint(values)\n
+
+bad_indent|Unexpected indentation inside function body|def add(a, b):\n    return a + b\n\ndef main():\n    x = 1\n      y = 2\n    print(x + y)\n
+
+malformed_def|def keyword with missing function name|def (a, b):\n    return a + b\n
+
+malformed_if|if statement with no condition|def add(a, b):\n    return a + b\n\nif :\n    print(add(1, 2))\n
+
+malformed_for|for loop with missing loop variable|def add(a, b):\n    return a + b\n\nfor in range(5):\n    print(add(1, 2))\n
+
+bad_class|class declaration with missing name|class :\n    def method(self):\n        pass\n
+
+bad_try|try block missing colon|def add(a, b):\n    return a + b\n\ntry\n    print(add(1, 2))\nexcept Exception as e:\n    print(e)\n
+
+bad_dict|Dictionary literal with missing value|def add(a, b):\n    return a + b\n\ndata = {"key": "value", "broken":}\nprint(data)\n
