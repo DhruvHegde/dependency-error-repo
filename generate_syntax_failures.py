@@ -33,6 +33,7 @@ Key design decisions
 import json
 import os
 import shutil
+import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -338,6 +339,9 @@ def main():
         except Exception as exc:
             print(f"Run {current + 1} failed.")
             print(f"Reason: {exc}")
+            print()
+            print("--- Full traceback ---")
+            traceback.print_exc()
             restore_app_py()
             return
 
