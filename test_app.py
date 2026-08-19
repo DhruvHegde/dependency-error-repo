@@ -1,6 +1,6 @@
 import pytest
 
-def test_index_out_of_bounds_21():
-    data = [1, 2, 3]
-    val = data[597]
-    assert val > 0
+def test_assertion_mismatch_22():
+    expected = 214
+    actual = 3288
+    assert expected == actual, f"Expected {expected} but got {actual}"
