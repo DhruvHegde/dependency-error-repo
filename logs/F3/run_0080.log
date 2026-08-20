@@ -1,0 +1,156 @@
+dependency-test	UNKNOWN STEP	﻿2026-08-19T11:39:23.3674974Z Current runner version: '2.336.0'
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3695882Z ##[group]Runner Image Provisioner
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3696629Z Hosted Compute Agent
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3697313Z Version: 20260729.566
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3697868Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3698490Z Build Date: 2026-07-29T19:17:02Z
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3699057Z Worker ID: {5845f4b3-a6b7-4f48-9544-6d0eece61a3f}
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3699601Z Azure Region: westus3
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3700112Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3701234Z ##[group]Operating System
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3701767Z Ubuntu
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3702200Z 24.04.4
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3702611Z LTS
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3703064Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3703509Z ##[group]Runner Image
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3703995Z Image: ubuntu-24.04
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3704520Z Version: 20260810.271.1
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3705505Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260810.271/images/ubuntu/Ubuntu2404-Readme.md
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3706789Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260810.271
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3707649Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3708658Z ##[group]GITHUB_TOKEN Permissions
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3710110Z Contents: read
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3710664Z Metadata: read
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3711176Z Packages: read
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3711648Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3713296Z Secret source: Actions
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.3714417Z Prepare workflow directory
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.5030751Z Prepare all required actions
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.5070571Z Getting action download info
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:23.7936557Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.3743324Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.8662703Z Complete job name: dependency-test
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9398807Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9407941Z ##[group]Run actions/checkout@v4
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9408884Z with:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9409597Z   repository: DhruvHegde/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9417018Z   token: ***
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9417947Z   ssh-strict: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9418657Z   ssh-user: git
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9419342Z   persist-credentials: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9420093Z   clean: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9420765Z   sparse-checkout-cone-mode: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9421563Z   fetch-depth: 1
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9422207Z   fetch-tags: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9422892Z   show-progress: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9423579Z   lfs: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9424254Z   submodules: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9424941Z   set-safe-directory: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9425718Z   allow-unsafe-pr-checkout: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:24.9426742Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2518447Z Syncing repository: DhruvHegde/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2520767Z ##[group]Getting Git version info
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2522052Z Working directory is '/home/runner/work/dependency-error-repo/dependency-error-repo'
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2523794Z [command]/usr/bin/git version
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2919569Z git version 2.54.0
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2938321Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2951328Z Temporarily overriding HOME='/home/runner/work/_temp/e27f4a98-f8ca-4468-af89-5557eeceee73' before making global git config changes
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2954110Z Adding repository directory to the temporary git global config as a safe directory
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2956950Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dependency-error-repo/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2994197Z Deleting the contents of '/home/runner/work/dependency-error-repo/dependency-error-repo'
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.2997536Z ##[group]Initializing the repository
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3002288Z [command]/usr/bin/git init /home/runner/work/dependency-error-repo/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3075872Z hint: Using 'master' as the name for the initial branch. This default branch name
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3078944Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3081720Z hint: to use in all of your new repositories, which will suppress this warning,
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3083891Z hint: call:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3085143Z hint:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3087755Z hint: 	git config --global init.defaultBranch <name>
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3089677Z hint:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3091252Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3093977Z hint: 'development'. The just-created branch can be renamed via this command:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3096009Z hint:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3097295Z hint: 	git branch -m <name>
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3098772Z hint:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3100255Z hint: Disable this message with "git config set advice.defaultBranchName false"
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3102822Z Initialized empty Git repository in /home/runner/work/dependency-error-repo/dependency-error-repo/.git/
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3106921Z [command]/usr/bin/git remote add origin https://github.com/DhruvHegde/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3124746Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3126714Z ##[group]Disabling automatic garbage collection
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3133712Z [command]/usr/bin/git config --local gc.auto 0
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3156869Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3158691Z ##[group]Setting up auth
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3161967Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3226918Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3479789Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3512215Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3701222Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3731652Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3923002Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3955888Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3957980Z ##[group]Fetching the repository
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.3966210Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8bfb666b89f80edf10ddc56cebde333fc45524c1:refs/remotes/origin/feature/test-failures
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8326655Z From https://github.com/DhruvHegde/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8328457Z  * [new ref]         8bfb666b89f80edf10ddc56cebde333fc45524c1 -> origin/feature/test-failures
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8345997Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8347572Z ##[group]Determining the checkout info
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8349028Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8352376Z [command]/usr/bin/git sparse-checkout disable
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8387689Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8414393Z ##[group]Checking out the ref
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8418255Z [command]/usr/bin/git checkout --progress --force -B feature/test-failures refs/remotes/origin/feature/test-failures
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8465907Z Switched to a new branch 'feature/test-failures'
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8468767Z branch 'feature/test-failures' set up to track 'origin/feature/test-failures'.
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8473116Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8503654Z [command]/usr/bin/git log -1 --format=%H
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8527364Z 8bfb666b89f80edf10ddc56cebde333fc45524c1
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8805196Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8809004Z ##[group]Run actions/setup-python@v5
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8809844Z with:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8810522Z   python-version: 3.11
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8811266Z   check-latest: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8818235Z   token: ***
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8818925Z   update-environment: true
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8819712Z   allow-prereleases: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8820473Z   freethreaded: false
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.8821179Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.9866534Z ##[group]Installed versions
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.9946753Z (node:2096) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.9949798Z (Use `node --trace-deprecation ...` to show where the warning was created)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.9951702Z Successfully set up CPython (3.11.15)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:25.9953674Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0110246Z ##[group]Run python -m pip install --upgrade pip
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0111362Z ^[[36;1mpython -m pip install --upgrade pip^[[0m
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0112331Z ^[[36;1mpip install -r requirements.txt^[[0m
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0167675Z shell: /usr/bin/bash -e {0}
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0168810Z env:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0169995Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0171904Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0173829Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0175543Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0177825Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0180352Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:26.0182394Z ##[endgroup]
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:30.7537978Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages (26.2.1)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.4668308Z ERROR: Ignored the following yanked versions: 4.2.12, 5.0.5
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.4670855Z ERROR: Ignored the following versions that require a different python version: 6.0 Requires-Python >=3.12; 6.0.1 Requires-Python >=3.12; 6.0.2 Requires-Python >=3.12; 6.0.3 Requires-Python >=3.12; 6.0.4 Requires-Python >=3.12; 6.0.5 Requires-Python >=3.12; 6.0.6 Requires-Python >=3.12; 6.0.7 Requires-Python >=3.12; 6.0.8 Requires-Python >=3.12; 6.0a1 Requires-Python >=3.12; 6.0b1 Requires-Python >=3.12; 6.0rc1 Requires-Python >=3.12; 6.1 Requires-Python >=3.12; 6.1a1 Requires-Python >=3.12; 6.1b1 Requires-Python >=3.12; 6.1rc1 Requires-Python >=3.12
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.4678624Z ERROR: Could not find a version that satisfies the requirement django==99.99.99 (from versions: 1.1.3, 1.1.4, 1.2, 1.2.1, 1.2.2, 1.2.3, 1.2.4, 1.2.5, 1.2.6, 1.2.7, 1.3, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.3.6, 1.3.7, 1.4, 1.4.1, 1.4.2, 1.4.3, 1.4.4, 1.4.5, 1.4.6, 1.4.7, 1.4.8, 1.4.9, 1.4.10, 1.4.11, 1.4.12, 1.4.13, 1.4.14, 1.4.15, 1.4.16, 1.4.17, 1.4.18, 1.4.19, 1.4.20, 1.4.21, 1.4.22, 1.5, 1.5.1, 1.5.2, 1.5.3, 1.5.4, 1.5.5, 1.5.6, 1.5.7, 1.5.8, 1.5.9, 1.5.10, 1.5.11, 1.5.12, 1.6, 1.6.1, 1.6.2, 1.6.3, 1.6.4, 1.6.5, 1.6.6, 1.6.7, 1.6.8, 1.6.9, 1.6.10, 1.6.11, 1.7, 1.7.1, 1.7.2, 1.7.3, 1.7.4, 1.7.5, 1.7.6, 1.7.7, 1.7.8, 1.7.9, 1.7.10, 1.7.11, 1.8a1, 1.8b1, 1.8b2, 1.8rc1, 1.8, 1.8.1, 1.8.2, 1.8.3, 1.8.4, 1.8.5, 1.8.6, 1.8.7, 1.8.8, 1.8.9, 1.8.10, 1.8.11, 1.8.12, 1.8.13, 1.8.14, 1.8.15, 1.8.16, 1.8.17, 1.8.18, 1.8.19, 1.9a1, 1.9b1, 1.9rc1, 1.9rc2, 1.9, 1.9.1, 1.9.2, 1.9.3, 1.9.4, 1.9.5, 1.9.6, 1.9.7, 1.9.8, 1.9.9, 1.9.10, 1.9.11, 1.9.12, 1.9.13, 1.10a1, 1.10b1, 1.10rc1, 1.10, 1.10.1, 1.10.2, 1.10.3, 1.10.4, 1.10.5, 1.10.6, 1.10.7, 1.10.8, 1.11a1, 1.11b1, 1.11rc1, 1.11, 1.11.1, 1.11.2, 1.11.3, 1.11.4, 1.11.5, 1.11.6, 1.11.7, 1.11.8, 1.11.9, 1.11.10, 1.11.11, 1.11.12, 1.11.13, 1.11.14, 1.11.15, 1.11.16, 1.11.17, 1.11.18, 1.11.20, 1.11.21, 1.11.22, 1.11.23, 1.11.24, 1.11.25, 1.11.26, 1.11.27, 1.11.28, 1.11.29, 2.0a1, 2.0b1, 2.0rc1, 2.0, 2.0.1, 2.0.2, 2.0.3, 2.0.4, 2.0.5, 2.0.6, 2.0.7, 2.0.8, 2.0.9, 2.0.10, 2.0.12, 2.0.13, 2.1a1, 2.1b1, 2.1rc1, 2.1, 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.1.5, 2.1.7, 2.1.8, 2.1.9, 2.1.10, 2.1.11, 2.1.12, 2.1.13, 2.1.14, 2.1.15, 2.2a1, 2.2b1, 2.2rc1, 2.2, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.2.7, 2.2.8, 2.2.9, 2.2.10, 2.2.11, 2.2.12, 2.2.13, 2.2.14, 2.2.15, 2.2.16, 2.2.17, 2.2.18, 2.2.19, 2.2.20, 2.2.21, 2.2.22, 2.2.23, 2.2.24, 2.2.25, 2.2.26, 2.2.27, 2.2.28, 3.0a1, 3.0b1, 3.0rc1, 3.0, 3.0.1, 3.0.2, 3.0.3, 3.0.4, 3.0.5, 3.0.6, 3.0.7, 3.0.8, 3.0.9, 3.0.10, 3.0.11, 3.0.12, 3.0.13, 3.0.14, 3.1a1, 3.1b1, 3.1rc1, 3.1, 3.1.1, 3.1.2, 3.1.3, 3.1.4, 3.1.5, 3.1.6, 3.1.7, 3.1.8, 3.1.9, 3.1.10, 3.1.11, 3.1.12, 3.1.13, 3.1.14, 3.2a1, 3.2b1, 3.2rc1, 3.2, 3.2.1, 3.2.2, 3.2.3, 3.2.4, 3.2.5, 3.2.6, 3.2.7, 3.2.8, 3.2.9, 3.2.10, 3.2.11, 3.2.12, 3.2.13, 3.2.14, 3.2.15, 3.2.16, 3.2.17, 3.2.18, 3.2.19, 3.2.20, 3.2.21, 3.2.22, 3.2.23, 3.2.24, 3.2.25, 4.0a1, 4.0b1, 4.0rc1, 4.0, 4.0.1, 4.0.2, 4.0.3, 4.0.4, 4.0.5, 4.0.6, 4.0.7, 4.0.8, 4.0.9, 4.0.10, 4.1a1, 4.1b1, 4.1rc1, 4.1, 4.1.1, 4.1.2, 4.1.3, 4.1.4, 4.1.5, 4.1.6, 4.1.7, 4.1.8, 4.1.9, 4.1.10, 4.1.11, 4.1.12, 4.1.13, 4.2a1, 4.2b1, 4.2rc1, 4.2, 4.2.1, 4.2.2, 4.2.3, 4.2.4, 4.2.5, 4.2.6, 4.2.7, 4.2.8, 4.2.9, 4.2.10, 4.2.11, 4.2.13, 4.2.14, 4.2.15, 4.2.16, 4.2.17, 4.2.18, 4.2.19, 4.2.20, 4.2.21, 4.2.22, 4.2.23, 4.2.24, 4.2.25, 4.2.26, 4.2.27, 4.2.28, 4.2.29, 4.2.30, 5.0a1, 5.0b1, 5.0rc1, 5.0, 5.0.1, 5.0.2, 5.0.3, 5.0.4, 5.0.6, 5.0.7, 5.0.8, 5.0.9, 5.0.10, 5.0.11, 5.0.12, 5.0.13, 5.0.14, 5.1a1, 5.1b1, 5.1rc1, 5.1, 5.1.1, 5.1.2, 5.1.3, 5.1.4, 5.1.5, 5.1.6, 5.1.7, 5.1.8, 5.1.9, 5.1.10, 5.1.11, 5.1.12, 5.1.13, 5.1.14, 5.1.15, 5.2a1, 5.2b1, 5.2rc1, 5.2, 5.2.1, 5.2.2, 5.2.3, 5.2.4, 5.2.5, 5.2.6, 5.2.7, 5.2.8, 5.2.9, 5.2.10, 5.2.11, 5.2.12, 5.2.13, 5.2.14, 5.2.15, 5.2.16, 5.2.17)
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.4683818Z ERROR: No matching distribution found for django==99.99.99
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5011423Z ##[error]Process completed with exit code 1.
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5137642Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5138584Z Post job cleanup.
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5867907Z [command]/usr/bin/git version
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5903477Z git version 2.54.0
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5934476Z Temporarily overriding HOME='/home/runner/work/_temp/45f759fd-99fe-408e-bd30-fbfd7a99a964' before making global git config changes
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5935559Z Adding repository directory to the temporary git global config as a safe directory
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5939697Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dependency-error-repo/dependency-error-repo
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.5973812Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6003645Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6222076Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6243120Z http.https://github.com/.extraheader
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6252337Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6281098Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6492937Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6535510Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.6865303Z Cleaning up orphan processes
+dependency-test	UNKNOWN STEP	2026-08-19T11:39:31.7130416Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
