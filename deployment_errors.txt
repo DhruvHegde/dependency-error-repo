@@ -1,0 +1,29 @@
+# F4 Deployment Error Scenarios
+
+# Category 1: Missing Environment Variables
+missing_database_url
+missing_api_key
+missing_aws_access_key
+missing_aws_secret_key
+missing_redis_url
+
+# Category 2: Invalid Format
+invalid_database_url_short
+invalid_api_key_length
+invalid_aws_access_key_format
+invalid_aws_secret_format
+invalid_redis_url_format
+
+# Category 3: Service Connection Failures
+fail_connect_database
+fail_connect_redis
+fail_connect_elasticsearch
+
+# Category 4: Permission Errors
+permission_denied_database_write
+permission_denied_bucket_access
+
+# Category 5: Invalid Credentials
+expired_api_key
+invalid_api_token
+expired_aws_credentials
