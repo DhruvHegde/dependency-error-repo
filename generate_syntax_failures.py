@@ -183,18 +183,19 @@ def main():
     if not scenarios:
         raise ValueError("No scenarios available.")
 
-    if F1_TOTAL_RUNS > len(scenarios):
-        raise ValueError(
-            f"F1_TOTAL_RUNS ({F1_TOTAL_RUNS}) exceeds number of scenarios "
-            f"({len(scenarios)}).  Add more scenarios or reduce F1_TOTAL_RUNS."
-        )
+    # Scenarios are intentionally cycled using modulo so we can generate a
+    # dataset larger than the number of unique scenario templates while
+    # retaining controlled, reproducible failure categories.  Run numbering
+    # and output file numbering (run_0001, run_0002, …) remain strictly
+    # sequential and are never reset when the scenario list wraps around.
+    n_scenarios = len(scenarios)
 
     # Back up the original app.py once at the start of the session.
     backup_app_py()
 
     while state["current_run"] < F1_TOTAL_RUNS:
         current = state["current_run"]
-        scenario = scenarios[current]
+        scenario = scenarios[current % n_scenarios]
 
         print()
         print(f"{'='*60}")
