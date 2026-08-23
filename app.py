@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-if :
+for in range(5):
     print(add(1, 2))
