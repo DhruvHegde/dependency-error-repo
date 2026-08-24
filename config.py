@@ -7,7 +7,7 @@ WORKFLOW_FILE = "ci.yml"
 FAILURE_TYPE = "F2"
 STAGE = "build"
 
-TOTAL_RUNS = 19
+TOTAL_RUNS = 39
 
 LOG_FOLDER = "logs/F2"
 METADATA_FOLDER = "metadata/F2"
