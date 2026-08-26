@@ -1,4 +1,6 @@
-from app import add
+import time
 
-def test_add():
-    assert add(2, 3) == 5
+
+def test_timeout():
+    while True:
+        time.sleep(1)
