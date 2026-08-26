@@ -21,7 +21,7 @@ def commit_and_push(message):
 
     run(f'git commit -m "{message}"')
 
-    run("git push origin main")
+    run("git push")
 
     sha = run("git rev-parse HEAD")
 
