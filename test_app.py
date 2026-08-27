@@ -1,5 +1,6 @@
 import time
 
-def test_timeout_178():
-    while True:
-        time.sleep(719)
+def test_timeout_179():
+    counter = 516
+    while counter != 495136:
+        counter += 1
