@@ -1,7 +1,8 @@
 def add(a, b):
     return a + b
 
-try:
-    pass
-except Exception as e:
-    raise RuntimeError from
+result = (
+    1 +
+    2 +
+    3
+print(result)
