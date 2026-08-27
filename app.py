@@ -1,7 +1,5 @@
 def add(a, b):
     return a + b
 
-for i in range(3):
-    print(i)
-        else:
-    pass
+x = 08
+print(x)
