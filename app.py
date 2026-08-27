@@ -1,9 +1,3 @@
-def add(a, b):
-    return a + b
-
-try:
-    pass
-except Exception:
-    pass
-finally
-    pass
+class MyClass
+    def method(self):
+        pass
