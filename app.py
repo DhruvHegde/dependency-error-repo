@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-finally:
+try:
     pass
