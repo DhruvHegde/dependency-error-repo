@@ -1,5 +1,5 @@
 import time
 
-def test_timeout_404():
+def test_timeout_405():
     import time
     time.sleep(9999)
