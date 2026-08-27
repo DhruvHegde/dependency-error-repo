@@ -4,6 +4,7 @@ import re
 import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from config import REPO_OWNER, REPO_NAME
 from automation.metadata_utils import save_metadata
@@ -18,6 +19,12 @@ BRANCH = "feature/timeout-errors"
 WORKFLOW = "timeout-ci.yml"
 
 TARGET_VALID = 500
+
+OLD_VARIANT_MAX = 500
+NEW_VARIANT_MIN = 501
+NEW_VARIANT_MAX = 758
+
+MAX_WORKERS = 12
 
 FAILURE_PATTERNS = [
     "timed out after",
@@ -78,9 +85,10 @@ def get_f4_commits():
         )
 
         if match:
-            commits[
-                int(match.group(1))
-            ] = sha
+
+            variant = int(match.group(1))
+
+            commits[variant] = sha
 
     return commits
 
@@ -95,26 +103,53 @@ def scan_log(log_text):
         for pattern in FAILURE_PATTERNS:
 
             if pattern.lower() in line.lower():
+
                 return pattern, line.strip()
 
     return None, None
 
 
+def download_log(run):
+
+    db_id = run["databaseId"]
+
+    try:
+
+        log_text = run_cmd(
+            f'gh run view {db_id} '
+            f'--log '
+            f'--repo "{REPO_OWNER}/{REPO_NAME}"'
+        )
+
+        return run, log_text, None
+
+    except Exception as e:
+
+        return run, "", str(e)
+
+
 def main():
 
+    print("Fetching generated F4 runs...")
+
     runs = get_runs()
+
+    print(f"GitHub returned {len(runs)} runs.")
+
+    print("Finding F4 generator commits...")
+
     commits = get_f4_commits()
+
+    print(
+        f"Found {len(commits)} generated F4 commits."
+    )
 
     sha_to_variant = {
         sha: variant
         for variant, sha in commits.items()
     }
 
-    print(
-        f"Found {len(commits)} generated F4 commits."
-    )
-
-    candidates = []
+    generated_runs = []
 
     for run in runs:
 
@@ -126,66 +161,260 @@ def main():
         if run.get("status") != "completed":
             continue
 
-        candidates.append(run)
+        generated_runs.append(run)
 
-    candidates.sort(
-        key=lambda r: sha_to_variant[
-            r["headSha"]
+    print(
+        f"Found {len(generated_runs)} "
+        f"completed generated runs."
+    )
+
+    # Only failed runs can possibly contain the timeout failure.
+    failed_runs = [
+        run
+        for run in generated_runs
+        if run.get("conclusion") == "failure"
+    ]
+
+    print(
+        f"Only downloading logs for "
+        f"{len(failed_runs)} failed runs."
+    )
+
+    old_failed = []
+    replacement_failed = []
+
+    for run in failed_runs:
+
+        variant = sha_to_variant[
+            run["headSha"]
+        ]
+
+        if variant <= OLD_VARIANT_MAX:
+
+            old_failed.append(run)
+
+        elif (
+            NEW_VARIANT_MIN
+            <= variant
+            <= NEW_VARIANT_MAX
+        ):
+
+            replacement_failed.append(run)
+
+    print(
+        f"Original failed runs: "
+        f"{len(old_failed)}"
+    )
+
+    print(
+        f"Replacement failed runs: "
+        f"{len(replacement_failed)}"
+    )
+
+    # Download old failed logs in parallel.
+    print("Checking original F4 failures...")
+
+    old_valid = []
+
+    with ThreadPoolExecutor(
+        max_workers=MAX_WORKERS
+    ) as executor:
+
+        futures = [
+            executor.submit(
+                download_log,
+                run
+            )
+            for run in old_failed
+        ]
+
+        completed = 0
+
+        for future in as_completed(futures):
+
+            run, log_text, error = future.result()
+
+            completed += 1
+
+            variant = sha_to_variant[
+                run["headSha"]
+            ]
+
+            if error:
+
+                print(
+                    f"[{completed}/{len(old_failed)}] "
+                    f"Variant {variant}: "
+                    f"log download failed"
+                )
+
+                continue
+
+            matched_pattern, matched_line = scan_log(
+                log_text
+            )
+
+            if matched_pattern:
+
+                old_valid.append(
+                    (
+                        run,
+                        log_text,
+                        matched_pattern,
+                        matched_line
+                    )
+                )
+
+                print(
+                    f"[{completed}/{len(old_failed)}] "
+                    f"Variant {variant}: VALID"
+                )
+
+            else:
+
+                print(
+                    f"[{completed}/{len(old_failed)}] "
+                    f"Variant {variant}: not F4"
+                )
+
+    print(
+        f"Found {len(old_valid)} "
+        f"valid original F4 runs."
+    )
+
+    if len(old_valid) < 242:
+
+        raise RuntimeError(
+            f"Expected at least 242 valid "
+            f"original F4 runs, found "
+            f"{len(old_valid)}."
+        )
+
+    # We need exactly 242 from the original dataset.
+    old_valid.sort(
+        key=lambda item:
+        sha_to_variant[
+            item[0]["headSha"]
         ]
     )
 
+    old_valid = old_valid[:242]
+
+    # All replacement variants are deliberately
+    # guaranteed timeout tests.
+    #
+    # Download their logs so the final dataset
+    # contains the actual GitHub Actions output.
     print(
-        f"Found {len(candidates)} completed "
-        f"generated runs."
+        f"Downloading {len(replacement_failed)} "
+        f"replacement F4 logs..."
     )
 
-    # First collect all genuinely valid timeout runs.
-    valid_runs = []
+    replacement_results = []
 
-    for run in candidates:
+    with ThreadPoolExecutor(
+        max_workers=MAX_WORKERS
+    ) as executor:
 
-        db_id = run["databaseId"]
-
-        try:
-
-            log_text = run_cmd(
-                f'gh run view {db_id} --log '
-                f'--repo "{REPO_OWNER}/{REPO_NAME}"'
+        futures = [
+            executor.submit(
+                download_log,
+                run
             )
+            for run in replacement_failed
+        ]
 
-        except Exception:
-            continue
+        completed = 0
 
-        matched_pattern, matched_line = scan_log(
-            log_text
-        )
+        for future in as_completed(futures):
 
-        if matched_pattern:
+            run, log_text, error = future.result()
 
-            valid_runs.append(
-                (
-                    run,
-                    log_text,
-                    matched_pattern,
-                    matched_line
+            completed += 1
+
+            variant = sha_to_variant[
+                run["headSha"]
+            ]
+
+            if error:
+
+                print(
+                    f"[{completed}/{len(replacement_failed)}] "
+                    f"Variant {variant}: DOWNLOAD FAILED"
                 )
+
+                continue
+
+            matched_pattern, matched_line = scan_log(
+                log_text
             )
 
+            if matched_pattern:
+
+                replacement_results.append(
+                    (
+                        run,
+                        log_text,
+                        matched_pattern,
+                        matched_line
+                    )
+                )
+
+                print(
+                    f"[{completed}/{len(replacement_failed)}] "
+                    f"Variant {variant}: VALID"
+                )
+
+            else:
+
+                print(
+                    f"[{completed}/{len(replacement_failed)}] "
+                    f"Variant {variant}: INVALID"
+                )
+
     print(
-        f"Found {len(valid_runs)} "
-        f"genuine F4 timeout runs."
+        f"Valid replacement F4 runs: "
+        f"{len(replacement_results)}"
     )
 
-    if len(valid_runs) < TARGET_VALID:
+    if len(replacement_results) < 258:
 
         raise RuntimeError(
-            f"Only {len(valid_runs)} valid F4 runs found. "
-            f"Need {TARGET_VALID}."
+            f"Expected 258 valid replacement "
+            f"F4 runs, found "
+            f"{len(replacement_results)}."
         )
 
-    # Keep exactly 500 valid runs.
-    valid_runs = valid_runs[:TARGET_VALID]
+    replacement_results.sort(
+        key=lambda item:
+        sha_to_variant[
+            item[0]["headSha"]
+        ]
+    )
 
+    replacement_results = replacement_results[:258]
+
+    # Combine:
+    #
+    # 242 original valid F4
+    # +
+    # 258 replacement valid F4
+    #
+    # = 500
+    all_valid = (
+        old_valid +
+        replacement_results
+    )
+
+    if len(all_valid) != TARGET_VALID:
+
+        raise RuntimeError(
+            f"Final dataset contains "
+            f"{len(all_valid)} runs instead of "
+            f"{TARGET_VALID}."
+        )
+
+    # Recreate output directories.
     LOG_DIR.mkdir(
         parents=True,
         exist_ok=True
@@ -196,32 +425,48 @@ def main():
         exist_ok=True
     )
 
+    # Sort deterministically.
+    all_valid.sort(
+        key=lambda item:
+        sha_to_variant[
+            item[0]["headSha"]
+        ]
+    )
+
     label_records = []
 
-    for index, (
+    print("Writing final 500-run dataset...")
+
+    for final_number, (
         run,
         log_text,
         matched_pattern,
         matched_line
     ) in enumerate(
-        valid_runs,
+        all_valid,
         start=1
     ):
 
-        run_number = index
+        commit_sha = run["headSha"]
 
         db_id = run["databaseId"]
-        commit_sha = run["headSha"]
-        conclusion = run.get("conclusion")
+
+        conclusion = run.get(
+            "conclusion"
+        )
+
+        original_variant = sha_to_variant[
+            commit_sha
+        ]
 
         log_file = (
             LOG_DIR /
-            f"run_{run_number:04d}.log"
+            f"run_{final_number:04d}.log"
         )
 
         metadata_file = (
             META_DIR /
-            f"run_{run_number:04d}.json"
+            f"run_{final_number:04d}.json"
         )
 
         with open(
@@ -235,16 +480,22 @@ def main():
         timestamp = (
             datetime.now(timezone.utc)
             .isoformat()
-            .replace("+00:00", "Z")
+            .replace(
+                "+00:00",
+                "Z"
+            )
         )
 
         metadata = {
 
             "run_number":
-                run_number,
+                final_number,
+
+            "source_variant":
+                original_variant,
 
             "dependency":
-                f"timeout_variant_{run_number}",
+                f"timeout_variant_{original_variant}",
 
             "commit_sha":
                 commit_sha,
@@ -288,10 +539,10 @@ def main():
         label_records.append({
 
             "run_number":
-                run_number,
+                final_number,
 
             "dependency":
-                f"timeout_variant_{run_number}",
+                f"timeout_variant_{original_variant}",
 
             "repository":
                 REPO_NAME,
@@ -346,11 +597,25 @@ def main():
         )
 
         writer.writeheader()
-        writer.writerows(label_records)
+
+        writer.writerows(
+            label_records
+        )
 
     print(
-        f"Successfully created "
-        f"{len(label_records)} valid F4 labels."
+        "======================================"
+    )
+
+    print(
+        "F4 DATASET COMPLETE"
+    )
+
+    print(
+        f"Valid F4 records: {len(label_records)}"
+    )
+
+    print(
+        "======================================"
     )
 
 
