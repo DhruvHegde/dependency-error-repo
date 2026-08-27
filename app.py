@@ -1,5 +1,6 @@
 def add(a, b):
     return a + b
 
-x = """hello world
-print(x)
+x = 1
+result = f"value: {}"
+print(result)
