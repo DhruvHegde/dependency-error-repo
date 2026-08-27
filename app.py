@@ -3,3 +3,5 @@ def add(a, b):
 
 try:
     pass
+except Exception as:
+    pass
