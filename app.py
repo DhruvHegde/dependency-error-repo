@@ -1,5 +1,6 @@
 def add(a, b):
     return a + b
 
-if (a + b := 5):
-    pass
+match:
+    case 1:
+        pass
