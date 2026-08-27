@@ -1,6 +1,6 @@
 import time
 
-def test_timeout_96():
-    value = 254
-    while value < 538062:
-        value += 1
+def test_timeout_97():
+    counter = 303
+    while counter != 439199:
+        counter += 1
