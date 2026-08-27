@@ -1,5 +1,7 @@
 def add(a, b):
     return a + b
 
-class = 5
-print(class)
+for i in range(3):
+    print(i)
+        else:
+    pass
