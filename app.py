@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-x = 1
-x +=
+add(1, 2) = 5
+print(add(1,2))
