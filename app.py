@@ -1,3 +1,2 @@
-class MyClass
-    def method(self):
-        pass
+def add(a, b)
+    return a + b
