@@ -1,4 +1,2 @@
-def add(a, b):
-    return a + b
-
-break
+class class Foo:
+    pass
