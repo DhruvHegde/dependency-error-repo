@@ -1,4 +1,5 @@
 def add(a, b):
     return a + b
 
-f = lambda x x * 2
+data = {"a": 1, "b": 2
+print(data)
