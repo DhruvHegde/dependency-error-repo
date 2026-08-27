@@ -1,6 +1,5 @@
 import time
 
-def test_timeout_297():
-    value = 851
-    while value < 547839:
-        value += 1
+def test_timeout_298():
+    import time
+    time.sleep(9999)
