@@ -1,6 +1,3 @@
-def add(a, b):
-    return a + b
-
-x = 1
-        y = 2
-print(x + y)
+def calc(a, b):
+    total = a + b
+return total
