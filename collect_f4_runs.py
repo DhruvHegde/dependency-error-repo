@@ -1,7 +1,6 @@
 import json
 import csv
 import re
-import shutil
 import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
@@ -16,8 +15,9 @@ META_DIR = Path("metadata/F4")
 LABEL_FILE = "labels.csv"
 
 BRANCH = "feature/timeout-errors"
+WORKFLOW = "timeout-ci.yml"
 
-TOTAL_RUNS = 500
+TARGET_VALID = 500
 
 FAILURE_PATTERNS = [
     "timed out after",
@@ -44,16 +44,14 @@ def run_cmd(cmd):
 
 def get_runs():
 
-    cmd = (
+    output = run_cmd(
         f'gh run list '
         f'--repo "{REPO_OWNER}/{REPO_NAME}" '
         f'--branch "{BRANCH}" '
-        f'--workflow "timeout-ci.yml" '
+        f'--workflow "{WORKFLOW}" '
         f'--limit 1000 '
         f'--json databaseId,headSha,status,conclusion,createdAt'
     )
-
-    output = run_cmd(cmd)
 
     return json.loads(output)
 
@@ -61,9 +59,8 @@ def get_runs():
 def get_f4_commits():
 
     output = run_cmd(
-        'git log --format="%H %s" '
-        '--grep="F4 timeout variant" '
-        '--all'
+        'git log --format="%H %s" --all '
+        '--grep="inject timeout failure variant"'
     )
 
     commits = {}
@@ -76,17 +73,14 @@ def get_f4_commits():
         sha, message = line.split(" ", 1)
 
         match = re.search(
-            r"F4 timeout variant (\d+)",
+            r"inject timeout failure variant (\d+)",
             message
         )
 
         if match:
-
-            run_number = int(
-                match.group(1)
-            )
-
-            commits[run_number] = sha
+            commits[
+                int(match.group(1))
+            ] = sha
 
     return commits
 
@@ -101,169 +95,142 @@ def scan_log(log_text):
         for pattern in FAILURE_PATTERNS:
 
             if pattern.lower() in line.lower():
-
                 return pattern, line.strip()
 
     return None, None
 
 
-def reset_directories():
+def main():
 
-    if LOG_DIR.exists():
-        shutil.rmtree(LOG_DIR)
+    runs = get_runs()
+    commits = get_f4_commits()
+
+    sha_to_variant = {
+        sha: variant
+        for variant, sha in commits.items()
+    }
+
+    print(
+        f"Found {len(commits)} generated F4 commits."
+    )
+
+    candidates = []
+
+    for run in runs:
+
+        sha = run.get("headSha")
+
+        if sha not in sha_to_variant:
+            continue
+
+        if run.get("status") != "completed":
+            continue
+
+        candidates.append(run)
+
+    candidates.sort(
+        key=lambda r: sha_to_variant[
+            r["headSha"]
+        ]
+    )
+
+    print(
+        f"Found {len(candidates)} completed "
+        f"generated runs."
+    )
+
+    # First collect all genuinely valid timeout runs.
+    valid_runs = []
+
+    for run in candidates:
+
+        db_id = run["databaseId"]
+
+        try:
+
+            log_text = run_cmd(
+                f'gh run view {db_id} --log '
+                f'--repo "{REPO_OWNER}/{REPO_NAME}"'
+            )
+
+        except Exception:
+            continue
+
+        matched_pattern, matched_line = scan_log(
+            log_text
+        )
+
+        if matched_pattern:
+
+            valid_runs.append(
+                (
+                    run,
+                    log_text,
+                    matched_pattern,
+                    matched_line
+                )
+            )
+
+    print(
+        f"Found {len(valid_runs)} "
+        f"genuine F4 timeout runs."
+    )
+
+    if len(valid_runs) < TARGET_VALID:
+
+        raise RuntimeError(
+            f"Only {len(valid_runs)} valid F4 runs found. "
+            f"Need {TARGET_VALID}."
+        )
+
+    # Keep exactly 500 valid runs.
+    valid_runs = valid_runs[:TARGET_VALID]
 
     LOG_DIR.mkdir(
         parents=True,
         exist_ok=True
     )
 
-    if META_DIR.exists():
-        shutil.rmtree(META_DIR)
-
     META_DIR.mkdir(
         parents=True,
         exist_ok=True
     )
 
-
-def main():
-
-    print(
-        "Resetting F4 logs and metadata..."
-    )
-
-    reset_directories()
-
-    print(
-        f"Fetching workflow runs for {BRANCH}..."
-    )
-
-    runs = get_runs()
-
-    print(
-        "Finding generated F4 commits..."
-    )
-
-    f4_commits = get_f4_commits()
-
-    print(
-        f"Found {len(f4_commits)} "
-        f"generated F4 commits."
-    )
-
-    if not f4_commits:
-
-        print(
-            "No F4 generator commits found."
-        )
-
-        return
-
-    completed_runs = []
-
-    for run in runs:
-
-        sha = run.get("headSha")
-
-        if sha not in f4_commits.values():
-            continue
-
-        if run.get("status") != "completed":
-            continue
-
-        completed_runs.append(run)
-
-    completed_runs.sort(
-        key=lambda x: f4_commits.get(
-            x["headSha"],
-            999999
-        )
-    )
-
-    completed_runs = completed_runs[
-        :TOTAL_RUNS
-    ]
-
-    print(
-        f"Processing {len(completed_runs)} "
-        f"completed F4 runs."
-    )
-
     label_records = []
 
-    for run in completed_runs:
+    for index, (
+        run,
+        log_text,
+        matched_pattern,
+        matched_line
+    ) in enumerate(
+        valid_runs,
+        start=1
+    ):
 
-        commit_sha = run["headSha"]
-
-        run_number = f4_commits[
-            commit_sha
-        ]
+        run_number = index
 
         db_id = run["databaseId"]
+        commit_sha = run["headSha"]
+        conclusion = run.get("conclusion")
 
-        conclusion = run.get(
-            "conclusion"
-        )
-
-        print(
-            f"Processing F4 run "
-            f"{run_number}/{TOTAL_RUNS} "
-            f"(Workflow ID: {db_id}, "
-            f"SHA: {commit_sha[:7]})"
-        )
-
-        log_file_path = (
+        log_file = (
             LOG_DIR /
             f"run_{run_number:04d}.log"
         )
 
-        try:
-
-            log_text = run_cmd(
-                f'gh run view {db_id} '
-                f'--log '
-                f'--repo "{REPO_OWNER}/{REPO_NAME}"'
-            )
-
-            with open(
-                log_file_path,
-                "w",
-                encoding="utf-8"
-            ) as f:
-
-                f.write(log_text)
-
-        except Exception as e:
-
-            print(
-                f"Warning: Failed to download "
-                f"log for {db_id}: {e}"
-            )
-
-            log_text = ""
-
-            with open(
-                log_file_path,
-                "w",
-                encoding="utf-8"
-            ) as f:
-
-                f.write("")
-
-        matched_pattern, matched_line = scan_log(
-            log_text
-        )
-
-        validation_status = (
-            "valid"
-            if matched_pattern
-            else "invalid"
-        )
-
-        metadata_file_path = (
+        metadata_file = (
             META_DIR /
             f"run_{run_number:04d}.json"
         )
+
+        with open(
+            log_file,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            f.write(log_text)
 
         timestamp = (
             datetime.now(timezone.utc)
@@ -292,13 +259,13 @@ def main():
                 conclusion,
 
             "log_file":
-                str(log_file_path).replace(
+                str(log_file).replace(
                     "\\",
                     "/"
                 ),
 
             "validation_status":
-                validation_status,
+                "valid",
 
             "is_dependency_error":
                 False,
@@ -314,11 +281,11 @@ def main():
         }
 
         save_metadata(
-            str(metadata_file_path),
+            str(metadata_file),
             metadata
         )
 
-        label_record = {
+        label_records.append({
 
             "run_number":
                 run_number,
@@ -345,30 +312,26 @@ def main():
                 "test",
 
             "validation_status":
-                validation_status,
+                "valid",
 
             "matched_pattern":
                 matched_pattern,
 
             "log_file":
-                str(log_file_path).replace(
+                str(log_file).replace(
                     "\\",
                     "/"
                 ),
 
             "metadata_file":
-                str(metadata_file_path).replace(
+                str(metadata_file).replace(
                     "\\",
                     "/"
                 ),
 
             "timestamp":
                 timestamp
-        }
-
-        label_records.append(
-            label_record
-        )
+        })
 
     with open(
         LABEL_FILE,
@@ -383,14 +346,11 @@ def main():
         )
 
         writer.writeheader()
-
-        for record in label_records:
-
-            writer.writerow(record)
+        writer.writerows(label_records)
 
     print(
-        f"Completed collecting "
-        f"{len(label_records)} F4 runs."
+        f"Successfully created "
+        f"{len(label_records)} valid F4 labels."
     )
 
 
