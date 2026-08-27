@@ -1,4 +1,7 @@
 def add(a, b):
     return a + b
 
-assert
+try:
+    pass
+except Exception as e:
+    raise RuntimeError from
