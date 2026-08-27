@@ -1,4 +1,5 @@
 def add(a, b):
     return a + b
 
-if True:
+for x range(5):
+    print(x)
