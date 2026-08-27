@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-result = {k v for k, v in [(1,2)]}
+result = sum(x for x in range(5)
 print(result)
