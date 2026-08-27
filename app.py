@@ -1,5 +1,6 @@
-class Calc:
-    def add(self, a, b):
-        return a + b
-      def sub(self, a, b):
-        return a - b
+def add(a, b):
+    return a + b
+
+x = 1
+        y = 2
+print(x + y)
