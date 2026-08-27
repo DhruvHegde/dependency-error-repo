@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-with open('x') as f, as g:
+with as f:
     pass
