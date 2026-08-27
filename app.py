@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-f = lambda x:
-print(f(1))
+class = 5
+print(class)
