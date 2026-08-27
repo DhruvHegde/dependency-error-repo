@@ -1,0 +1,188 @@
+timeout-test	UNKNOWN STEP	﻿2026-08-27T06:24:26.7183465Z Current runner version: '2.336.0'
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7211843Z ##[group]Runner Image Provisioner
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7213225Z Hosted Compute Agent
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7214104Z Version: 20260819.586
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7215051Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7216285Z Build Date: 2026-08-18T23:20:18Z
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7217511Z Worker ID: {2892f1ad-62ba-4883-ae52-68d592079320}
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7218701Z Azure Region: eastus2
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7219611Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7221771Z ##[group]Operating System
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7222860Z Ubuntu
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7223687Z 24.04.4
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7224585Z LTS
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7225407Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7226238Z ##[group]Runner Image
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7227501Z Image: ubuntu-24.04
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7228395Z Version: 20260823.283.1
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7230397Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7233396Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7234912Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7236744Z ##[group]GITHUB_TOKEN Permissions
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7240055Z Contents: read
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7240917Z Metadata: read
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7241891Z Packages: read
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7242695Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7245717Z Secret source: Actions
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7247833Z Prepare workflow directory
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7712730Z Prepare all required actions
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.7781501Z Getting action download info
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:26.9952847Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.1362459Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.3290994Z Complete job name: timeout-test
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4156404Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4169738Z ##[group]Run actions/checkout@v4
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4170767Z with:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4171487Z   repository: DhruvHegde/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4176822Z   token: ***
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4177577Z   ssh-strict: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4178042Z   ssh-user: git
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4178497Z   persist-credentials: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4178999Z   clean: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4179452Z   sparse-checkout-cone-mode: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4179977Z   fetch-depth: 1
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4180430Z   fetch-tags: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4180874Z   show-progress: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4181323Z   lfs: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4181793Z   submodules: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4182253Z   set-safe-directory: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4182766Z   allow-unsafe-pr-checkout: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.4183710Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5222575Z Syncing repository: DhruvHegde/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5225634Z ##[group]Getting Git version info
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5227008Z Working directory is '/home/runner/work/dependency-error-repo/dependency-error-repo'
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5229319Z [command]/usr/bin/git version
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5282451Z git version 2.55.0
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5344026Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5354483Z Temporarily overriding HOME='/home/runner/work/_temp/34143453-2f13-47fa-8c6e-9ef168ff9cca' before making global git config changes
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5356681Z Adding repository directory to the temporary git global config as a safe directory
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5358959Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dependency-error-repo/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5413491Z Deleting the contents of '/home/runner/work/dependency-error-repo/dependency-error-repo'
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5418045Z ##[group]Initializing the repository
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5423594Z [command]/usr/bin/git init /home/runner/work/dependency-error-repo/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5518627Z hint: Using 'master' as the name for the initial branch. This default branch name
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5520530Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5522017Z hint: to use in all of your new repositories, which will suppress this warning,
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5523628Z hint: call:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5524299Z hint:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5525182Z hint: 	git config --global init.defaultBranch <name>
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5526156Z hint:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5527062Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5528805Z hint: 'development'. The just-created branch can be renamed via this command:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5530017Z hint:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5530677Z hint: 	git branch -m <name>
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5531420Z hint:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5532438Z hint: Disable this message with "git config set advice.defaultBranchName false"
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5534304Z Initialized empty Git repository in /home/runner/work/dependency-error-repo/dependency-error-repo/.git/
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5537515Z [command]/usr/bin/git remote add origin https://github.com/DhruvHegde/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5587307Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5588627Z ##[group]Disabling automatic garbage collection
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5591398Z [command]/usr/bin/git config --local gc.auto 0
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5631324Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5632542Z ##[group]Setting up auth
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5639379Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.5680302Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6055484Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6098772Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6376906Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6420194Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6752923Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6755518Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6756359Z ##[group]Fetching the repository
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.6759069Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5c14f812a35a6d0671f74d2bfe12fd04adc68257:refs/remotes/origin/feature/timeout-errors
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9248170Z From https://github.com/DhruvHegde/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9250231Z  * [new ref]         5c14f812a35a6d0671f74d2bfe12fd04adc68257 -> origin/feature/timeout-errors
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9253838Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9255235Z ##[group]Determining the checkout info
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9256874Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9262951Z [command]/usr/bin/git sparse-checkout disable
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9318409Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9353222Z ##[group]Checking out the ref
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9359458Z [command]/usr/bin/git checkout --progress --force -B feature/timeout-errors refs/remotes/origin/feature/timeout-errors
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9432614Z Switched to a new branch 'feature/timeout-errors'
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9436460Z branch 'feature/timeout-errors' set up to track 'origin/feature/timeout-errors'.
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9443518Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9501561Z [command]/usr/bin/git log -1 --format=%H
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9532854Z 5c14f812a35a6d0671f74d2bfe12fd04adc68257
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9848338Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9851703Z ##[group]Run actions/setup-python@v5
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9852302Z with:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9852742Z   python-version: 3.11
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9853254Z   check-latest: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9857888Z   token: ***
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9858357Z   update-environment: true
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9858930Z   allow-prereleases: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9859464Z   freethreaded: false
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:27.9859943Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1229980Z ##[group]Installed versions
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1309584Z (node:2218) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1311527Z (Use `node --trace-deprecation ...` to show where the warning was created)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1312886Z Successfully set up CPython (3.11.16)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1314240Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1501454Z ##[group]Run python -m pip install --upgrade pip
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1502399Z ^[[36;1mpython -m pip install --upgrade pip^[[0m
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1503101Z ^[[36;1mpip install pytest^[[0m
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1563714Z shell: /usr/bin/bash -e {0}
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1564560Z env:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1565424Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1566682Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1567878Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1667815Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1669441Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1670615Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.1671604Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:28.7465098Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.3585014Z Collecting pytest
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4173406Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4359198Z Collecting iniconfig>=1.0.1 (from pytest)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4437621Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4635678Z Collecting packaging>=22 (from pytest)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4714845Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4882851Z Collecting pluggy<2,>=1.5 (from pytest)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.4961497Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5190192Z Collecting pygments>=2.7.2 (from pytest)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5266945Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5396517Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5723631Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5825125Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.5918626Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.6017927Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.6249596Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 51.4 MB/s  0:00:00
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:29.6783627Z Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7100075Z 
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7110289Z Successfully installed iniconfig-2.3.0 packaging-26.3 pluggy-1.6.0 pygments-2.21.0 pytest-9.1.1
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7932792Z ##[group]Run pytest test_app.py
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7933144Z ^[[36;1mpytest test_app.py^[[0m
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7977455Z shell: /usr/bin/bash -e {0}
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7977765Z env:
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7978048Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7978505Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7978942Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7979326Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7979722Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7980125Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:30.7980511Z ##[endgroup]
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:31.1907993Z ============================= test session starts ==============================
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:31.1909005Z platform linux -- Python 3.11.16, pytest-9.1.1, pluggy-1.6.0
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:31.1919030Z rootdir: /home/runner/work/dependency-error-repo/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:31.1919707Z collected 1 item
+timeout-test	UNKNOWN STEP	2026-08-27T06:24:31.1919934Z 
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.2979577Z ##[error]The action 'Run Tests' has timed out after 1 minutes.
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.3126480Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.3127822Z Post job cleanup.
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4039491Z [command]/usr/bin/git version
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4089636Z git version 2.55.0
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4133832Z Temporarily overriding HOME='/home/runner/work/_temp/ca7b895b-e5d7-4063-9c8b-07da380314a8' before making global git config changes
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4135071Z Adding repository directory to the temporary git global config as a safe directory
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4140592Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/dependency-error-repo/dependency-error-repo
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4187517Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4228013Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4506450Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4538084Z http.https://github.com/.extraheader
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4552047Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4597407Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4891387Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.4940228Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.5411107Z Cleaning up orphan processes
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.5759149Z Terminate orphan process: pid (2276) (pytest)
+timeout-test	UNKNOWN STEP	2026-08-27T06:25:43.5812378Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
