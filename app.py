@@ -1,4 +1,5 @@
 def add(a, b):
     return a + b
 
-t = (*,)
+x = 'hello
+print(x)
