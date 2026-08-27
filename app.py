@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-data = {"a": 1, "b": 2
-print(data)
+result = max(1, 2, 3
+print(result)
