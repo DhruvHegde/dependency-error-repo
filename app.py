@@ -1,7 +1,6 @@
 def add(a, b):
     return a + b
 
-x = 1
-if x > 0:
-    print('a')
-	print('b')
+for i in range(3):
+    print(i)
+	print('tab')
