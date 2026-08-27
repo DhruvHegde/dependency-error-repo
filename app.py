@@ -1,7 +1,5 @@
 def add(a, b):
     return a + b
 
-try:
-    pass
-except Exception as:
+with open('x') as f, as g:
     pass
