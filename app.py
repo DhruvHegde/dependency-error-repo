@@ -1,3 +1,8 @@
-def calc(a, b):
-    total = a + b
-return total
+def add(a, b):
+    return a + b
+
+x = 1
+if x > 0:
+    print('pos')
+        elif x == 0:
+    print('zero')
