@@ -97,7 +97,7 @@ def load_scenarios():
                     "Expected format: scenario_id|description|content"
                 )
             scenario_id, description, content_escaped = parts
-            content = content_escaped.replace("\\n", "\n")
+            content = content_escaped.replace("\\n", "\n").replace("\\t", "\t")
             scenarios.append({
                 "id": scenario_id.strip(),
                 "description": description.strip(),
