@@ -201,7 +201,7 @@ indent_elif_wrong_level|elif block at wrong indentation level|def add(a, b):\n  
 
 mixed_tabs_spaces_def|Function body mixing tabs and spaces (TabError)|def add(a, b):\n    x = a\n\ty = b\n    return x + y\n
 
-mixed_tabs_spaces_if|if body mixing tabs and spaces (TabError)|def add(a, b):\n    return a + b\n\nx = 1\nif x > 0:\n    print('a')\n\tprint('b')\n
+mixed_tabs_spaces_if|while loop body mixing tabs and spaces (TabError)|def add(a, b):\n    return a + b\n\nresults = []\nwhile len(results) < 3:\n    results.append(add(1, 2))\n\tprint(results)\n
 
 mixed_tabs_spaces_for|for body mixing tabs and spaces (TabError)|def add(a, b):\n    return a + b\n\nfor i in range(3):\n    print(i)\n\tprint('tab')\n
 

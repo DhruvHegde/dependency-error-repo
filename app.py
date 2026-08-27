@@ -1,7 +1,7 @@
 def add(a, b):
     return a + b
 
-x = 1
-if x > 0:
-    print('a')
-	print('b')
+results = []
+while len(results) < 3:
+    results.append(add(1, 2))
+	print(results)
