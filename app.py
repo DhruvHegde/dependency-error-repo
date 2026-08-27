@@ -1,6 +1,5 @@
 def add(a, b):
     return a + b
 
-match:
-    case 1:
-        pass
+x: = 5
+print(x)
