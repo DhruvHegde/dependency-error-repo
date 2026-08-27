@@ -1,5 +1,5 @@
 import time
 
-def test_timeout_253():
-    while True:
-        time.sleep(814)
+def test_timeout_254():
+    import time
+    time.sleep(9999)
