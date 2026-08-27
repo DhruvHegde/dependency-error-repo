@@ -1,3 +1,5 @@
-def add(a, b):
-    global
-    return a + b
+def outer():
+    x = 1
+    def inner():
+        nonlocal
+        pass
