@@ -1,4 +1,7 @@
 def add(a, b):
-    x = a
-	y = b
-    return x + y
+    return a + b
+
+x = 1
+if x > 0:
+    print('a')
+	print('b')
