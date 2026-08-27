@@ -1,2 +1,1 @@
-class Child(Parent:
-    pass
+return 42
