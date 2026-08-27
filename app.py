@@ -1,2 +1,1 @@
-def add(**kwargs, a):
-    return a
+class Empty:
