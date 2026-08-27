@@ -1,5 +1,5 @@
 def add(a, b):
     return a + b
 
-x = "hello
+x = """hello world
 print(x)
