@@ -1,6 +1,5 @@
 def add(a, b):
     return a + b
 
-x = 1
-result = f"value: {x"
+result = [x for x in]
 print(result)
