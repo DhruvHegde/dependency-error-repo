@@ -1,4 +1,4 @@
 def add(a, b):
     return a + b
 
-d = {: 1}
+vals = [1, 2,
