@@ -3,7 +3,7 @@ import subprocess
 import time
 import re
 
-TOTAL_RUNS = 1
+TOTAL_RUNS = 500
 TEST_FILE = "test_app.py"
 BRANCH = "feature/timeout-errors"
 

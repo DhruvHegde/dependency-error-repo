@@ -1,10 +1,10 @@
-import os
 import json
+import csv
+import re
+import shutil
 import subprocess
 from pathlib import Path
-from datetime import datetime
-import shutil
-import csv
+from datetime import datetime, timezone
 
 from config import REPO_OWNER, REPO_NAME
 from automation.metadata_utils import save_metadata
@@ -17,7 +17,7 @@ LABEL_FILE = "labels.csv"
 
 BRANCH = "feature/timeout-errors"
 
-TOTAL_RUNS = 1
+TOTAL_RUNS = 500
 
 FAILURE_PATTERNS = [
     "timed out after",
@@ -49,13 +49,46 @@ def get_runs():
         f'--repo "{REPO_OWNER}/{REPO_NAME}" '
         f'--branch "{BRANCH}" '
         f'--workflow "timeout-ci.yml" '
-        f'--limit 700 '
+        f'--limit 1000 '
         f'--json databaseId,headSha,status,conclusion,createdAt'
     )
 
     output = run_cmd(cmd)
 
     return json.loads(output)
+
+
+def get_f4_commits():
+
+    output = run_cmd(
+        'git log --format="%H %s" '
+        '--grep="F4 timeout variant" '
+        '--all'
+    )
+
+    commits = {}
+
+    for line in output.splitlines():
+
+        if not line.strip():
+            continue
+
+        sha, message = line.split(" ", 1)
+
+        match = re.search(
+            r"F4 timeout variant (\d+)",
+            message
+        )
+
+        if match:
+
+            run_number = int(
+                match.group(1)
+            )
+
+            commits[run_number] = sha
+
+    return commits
 
 
 def scan_log(log_text):
@@ -67,7 +100,7 @@ def scan_log(log_text):
 
         for pattern in FAILURE_PATTERNS:
 
-            if pattern in line:
+            if pattern.lower() in line.lower():
 
                 return pattern, line.strip()
 
@@ -95,7 +128,9 @@ def reset_directories():
 
 def main():
 
-    print("Resetting F4 logs and metadata...")
+    print(
+        "Resetting F4 logs and metadata..."
+    )
 
     reset_directories()
 
@@ -105,16 +140,49 @@ def main():
 
     runs = get_runs()
 
-    completed_runs = [
-        run for run in runs
-        if run.get("status") == "completed"
-    ]
-
-    completed_runs.sort(
-        key=lambda x: x.get("createdAt", "")
+    print(
+        "Finding generated F4 commits..."
     )
 
-    completed_runs = completed_runs[:TOTAL_RUNS]
+    f4_commits = get_f4_commits()
+
+    print(
+        f"Found {len(f4_commits)} "
+        f"generated F4 commits."
+    )
+
+    if not f4_commits:
+
+        print(
+            "No F4 generator commits found."
+        )
+
+        return
+
+    completed_runs = []
+
+    for run in runs:
+
+        sha = run.get("headSha")
+
+        if sha not in f4_commits.values():
+            continue
+
+        if run.get("status") != "completed":
+            continue
+
+        completed_runs.append(run)
+
+    completed_runs.sort(
+        key=lambda x: f4_commits.get(
+            x["headSha"],
+            999999
+        )
+    )
+
+    completed_runs = completed_runs[
+        :TOTAL_RUNS
+    ]
 
     print(
         f"Processing {len(completed_runs)} "
@@ -123,18 +191,19 @@ def main():
 
     label_records = []
 
-    for idx, run in enumerate(
-        completed_runs,
-        start=1
-    ):
-
-        run_number = idx
-
-        db_id = run["databaseId"]
+    for run in completed_runs:
 
         commit_sha = run["headSha"]
 
-        conclusion = run.get("conclusion")
+        run_number = f4_commits[
+            commit_sha
+        ]
+
+        db_id = run["databaseId"]
+
+        conclusion = run.get(
+            "conclusion"
+        )
 
         print(
             f"Processing F4 run "
@@ -173,6 +242,14 @@ def main():
 
             log_text = ""
 
+            with open(
+                log_file_path,
+                "w",
+                encoding="utf-8"
+            ) as f:
+
+                f.write("")
+
         matched_pattern, matched_line = scan_log(
             log_text
         )
@@ -188,20 +265,31 @@ def main():
             f"run_{run_number:04d}.json"
         )
 
+        timestamp = (
+            datetime.now(timezone.utc)
+            .isoformat()
+            .replace("+00:00", "Z")
+        )
+
         metadata = {
 
-            "run_number": run_number,
+            "run_number":
+                run_number,
 
             "dependency":
                 f"timeout_variant_{run_number}",
 
-            "commit_sha": commit_sha,
+            "commit_sha":
+                commit_sha,
 
-            "workflow_id": db_id,
+            "workflow_id":
+                db_id,
 
-            "workflow_status": "completed",
+            "workflow_status":
+                "completed",
 
-            "workflow_conclusion": conclusion,
+            "workflow_conclusion":
+                conclusion,
 
             "log_file":
                 str(log_file_path).replace(
@@ -212,7 +300,8 @@ def main():
             "validation_status":
                 validation_status,
 
-            "is_dependency_error": False,
+            "is_dependency_error":
+                False,
 
             "matched_pattern":
                 matched_pattern,
@@ -221,7 +310,7 @@ def main():
                 matched_line,
 
             "timestamp":
-                datetime.utcnow().isoformat() + "Z"
+                timestamp
         }
 
         save_metadata(
@@ -231,23 +320,29 @@ def main():
 
         label_record = {
 
-            "run_number": run_number,
+            "run_number":
+                run_number,
 
             "dependency":
                 f"timeout_variant_{run_number}",
 
-            "repository": REPO_NAME,
+            "repository":
+                REPO_NAME,
 
-            "commit_sha": commit_sha,
+            "commit_sha":
+                commit_sha,
 
-            "workflow_id": db_id,
+            "workflow_id":
+                db_id,
 
             "workflow_conclusion":
                 conclusion,
 
-            "failure_type": "F4",
+            "failure_type":
+                "F4",
 
-            "stage": "test",
+            "stage":
+                "test",
 
             "validation_status":
                 validation_status,
@@ -268,14 +363,12 @@ def main():
                 ),
 
             "timestamp":
-                datetime.utcnow().isoformat() + "Z"
+                timestamp
         }
 
-        label_records.append(label_record)
-
-    # Preserve existing F2 and F3 records.
-
-    all_records = label_records
+        label_records.append(
+            label_record
+        )
 
     with open(
         LABEL_FILE,
@@ -291,7 +384,8 @@ def main():
 
         writer.writeheader()
 
-        for record in all_records:
+        for record in label_records:
+
             writer.writerow(record)
 
     print(
