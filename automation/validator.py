@@ -10,6 +10,12 @@ DEPENDENCY_PATTERNS = [
     "Invalid requirement",
     "ERROR: Could not find",
     "Ignored the following versions"
+    "Cannot install",
+    "requires a different Python",
+    "Failed building wheel",
+    "Could not build wheels",
+    "metadata-generation-failed",
+    "subprocess-exited-with-error"
 ]
 
 
