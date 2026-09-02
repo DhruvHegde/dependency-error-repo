@@ -1,5 +1,5 @@
 import pytest
-from src.app import assert_positive
+from src.app import get_list_item
 
-def test_assert_positive():
-    assert assert_positive(-5) == -5
+def test_get_list_item():
+    assert get_list_item([1, 2, 3], 999) == 2
