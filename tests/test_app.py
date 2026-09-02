@@ -25,7 +25,7 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_zero_division_error():
-    """Injected synthetic ZeroDivisionError."""
-    from src.app import calculate_division
-    calculate_division(42, 0)
+def test_file_not_found_error():
+    """Injected synthetic FileNotFoundError."""
+    from src.app import read_config_file
+    read_config_file("fixtures/non_existent_pipeline_config.json")
