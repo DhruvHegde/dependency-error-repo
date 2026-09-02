@@ -25,7 +25,7 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_type_error():
-    """Injected synthetic TypeError."""
-    from src.app import calculate_division
-    calculate_division("invalid_string", 5)
+def test_value_error():
+    """Injected synthetic ValueError."""
+    from src.app import convert_to_int
+    convert_to_int("unparseable_alphanumeric_0x99")
