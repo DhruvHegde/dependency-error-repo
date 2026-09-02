@@ -25,7 +25,7 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_attribute_error():
-    """Injected synthetic AttributeError."""
-    from src.app import get_object_attribute
-    get_object_attribute(object())
+def test_zero_division_error():
+    """Injected synthetic ZeroDivisionError."""
+    from src.app import calculate_division
+    calculate_division(42, 0)
