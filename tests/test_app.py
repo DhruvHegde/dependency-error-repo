@@ -25,7 +25,7 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_value_error():
-    """Injected synthetic ValueError."""
-    from src.app import convert_to_int
-    convert_to_int("unparseable_alphanumeric_0x99")
+def test_attribute_error():
+    """Injected synthetic AttributeError."""
+    from src.app import get_object_attribute
+    get_object_attribute(object())
