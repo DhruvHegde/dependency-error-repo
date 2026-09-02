@@ -25,8 +25,8 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_index_error():
-    """Injected synthetic IndexError."""
-    from src.app import get_list_item
-    dataset = [10, 20, 30]
-    get_list_item(dataset, 999)
+def test_key_error():
+    """Injected synthetic KeyError."""
+    from src.app import get_dict_value
+    config = {"env": "staging", "retries": 3}
+    get_dict_value(config, "missing_auth_token")
