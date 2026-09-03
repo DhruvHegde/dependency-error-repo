@@ -1,0 +1,336 @@
+
+--- STEP: 0_dependency-test.txt ---
+﻿2026-09-03T06:43:59.7101869Z Current runner version: '2.337.0'
+2026-09-03T06:43:59.7127899Z ##[group]Runner Image Provisioner
+2026-09-03T06:43:59.7128848Z Hosted Compute Agent
+2026-09-03T06:43:59.7129510Z Version: 20260819.586
+2026-09-03T06:43:59.7130137Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+2026-09-03T06:43:59.7130844Z Build Date: 2026-08-18T23:20:18Z
+2026-09-03T06:43:59.7131599Z Worker ID: {bc9cdbad-c55b-4468-83b8-a113145c0b00}
+2026-09-03T06:43:59.7132416Z Azure Region: westus2
+2026-09-03T06:43:59.7133025Z ##[endgroup]
+2026-09-03T06:43:59.7134843Z ##[group]Operating System
+2026-09-03T06:43:59.7135487Z Ubuntu
+2026-09-03T06:43:59.7136105Z 24.04.4
+2026-09-03T06:43:59.7136638Z LTS
+2026-09-03T06:43:59.7137175Z ##[endgroup]
+2026-09-03T06:43:59.7137735Z ##[group]Runner Image
+2026-09-03T06:43:59.7138405Z Image: ubuntu-24.04
+2026-09-03T06:43:59.7139076Z Version: 20260823.283.1
+2026-09-03T06:43:59.7140290Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-03T06:43:59.7141957Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+2026-09-03T06:43:59.7142921Z ##[endgroup]
+2026-09-03T06:43:59.7144176Z ##[group]GITHUB_TOKEN Permissions
+2026-09-03T06:43:59.7146531Z Contents: read
+2026-09-03T06:43:59.7147259Z Metadata: read
+2026-09-03T06:43:59.7147864Z Packages: read
+2026-09-03T06:43:59.7148803Z ##[endgroup]
+2026-09-03T06:43:59.7150961Z Secret source: Actions
+2026-09-03T06:43:59.7152112Z Prepare workflow directory
+2026-09-03T06:43:59.7491399Z Prepare all required actions
+2026-09-03T06:43:59.7541055Z Getting action download info
+2026-09-03T06:44:00.1375916Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-03T06:44:00.2816099Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-03T06:44:00.4713961Z Complete job name: dependency-test
+2026-09-03T06:44:00.5613590Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:00.5623401Z ##[group]Run actions/checkout@v4
+2026-09-03T06:44:00.5624170Z with:
+2026-09-03T06:44:00.5624873Z   repository: DhruvHegde/log-generation
+2026-09-03T06:44:00.5629204Z   token: ***
+2026-09-03T06:44:00.5629835Z   ssh-strict: true
+2026-09-03T06:44:00.5630491Z   ssh-user: git
+2026-09-03T06:44:00.5630963Z   persist-credentials: true
+2026-09-03T06:44:00.5631465Z   clean: true
+2026-09-03T06:44:00.5631913Z   sparse-checkout-cone-mode: true
+2026-09-03T06:44:00.5632434Z   fetch-depth: 1
+2026-09-03T06:44:00.5632858Z   fetch-tags: false
+2026-09-03T06:44:00.5633292Z   show-progress: true
+2026-09-03T06:44:00.5633737Z   lfs: false
+2026-09-03T06:44:00.5634191Z   submodules: false
+2026-09-03T06:44:00.5634965Z   set-safe-directory: true
+2026-09-03T06:44:00.5635493Z   allow-unsafe-pr-checkout: false
+2026-09-03T06:44:00.5636407Z ##[endgroup]
+2026-09-03T06:44:00.6715298Z Syncing repository: DhruvHegde/log-generation
+2026-09-03T06:44:00.6717433Z ##[group]Getting Git version info
+2026-09-03T06:44:00.6718283Z Working directory is '/home/runner/work/log-generation/log-generation'
+2026-09-03T06:44:00.6719520Z [command]/usr/bin/git version
+2026-09-03T06:44:00.6856040Z git version 2.55.0
+2026-09-03T06:44:00.6883873Z ##[endgroup]
+2026-09-03T06:44:00.6906334Z Temporarily overriding HOME='/home/runner/work/_temp/881e36f4-4069-4234-b215-1573c04001ec' before making global git config changes
+2026-09-03T06:44:00.6908534Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-03T06:44:00.6912048Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:00.6978493Z Deleting the contents of '/home/runner/work/log-generation/log-generation'
+2026-09-03T06:44:00.6982551Z ##[group]Initializing the repository
+2026-09-03T06:44:00.6988675Z [command]/usr/bin/git init /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:00.7125565Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-03T06:44:00.7127336Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-03T06:44:00.7128947Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-03T06:44:00.7129998Z hint: call:
+2026-09-03T06:44:00.7130715Z hint:
+2026-09-03T06:44:00.7131511Z hint: 	git config --global init.defaultBranch <name>
+2026-09-03T06:44:00.7132295Z hint:
+2026-09-03T06:44:00.7133227Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-03T06:44:00.7134208Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-03T06:44:00.7135587Z hint:
+2026-09-03T06:44:00.7136264Z hint: 	git branch -m <name>
+2026-09-03T06:44:00.7136754Z hint:
+2026-09-03T06:44:00.7137404Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-03T06:44:00.7138539Z Initialized empty Git repository in /home/runner/work/log-generation/log-generation/.git/
+2026-09-03T06:44:00.7152339Z [command]/usr/bin/git remote add origin https://github.com/DhruvHegde/log-generation
+2026-09-03T06:44:00.7200346Z ##[endgroup]
+2026-09-03T06:44:00.7201484Z ##[group]Disabling automatic garbage collection
+2026-09-03T06:44:00.7205267Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-03T06:44:00.7241850Z ##[endgroup]
+2026-09-03T06:44:00.7242900Z ##[group]Setting up auth
+2026-09-03T06:44:00.7250835Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-03T06:44:00.7289009Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-03T06:44:00.7717042Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-03T06:44:00.7765978Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-03T06:44:00.8035687Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-03T06:44:00.8078739Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-03T06:44:00.8345794Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-03T06:44:00.8391611Z ##[endgroup]
+2026-09-03T06:44:00.8392924Z ##[group]Fetching the repository
+2026-09-03T06:44:00.8402720Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b75a30e022453d32b4d9dbb9c3efc99e6bee5000:refs/remotes/origin/feature/f3-test-failures
+2026-09-03T06:44:01.1768051Z From https://github.com/DhruvHegde/log-generation
+2026-09-03T06:44:01.1770111Z  * [new ref]         b75a30e022453d32b4d9dbb9c3efc99e6bee5000 -> origin/feature/f3-test-failures
+2026-09-03T06:44:01.1773492Z ##[endgroup]
+2026-09-03T06:44:01.1775223Z ##[group]Determining the checkout info
+2026-09-03T06:44:01.1777075Z ##[endgroup]
+2026-09-03T06:44:01.1783818Z [command]/usr/bin/git sparse-checkout disable
+2026-09-03T06:44:01.1848631Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-03T06:44:01.1886246Z ##[group]Checking out the ref
+2026-09-03T06:44:01.1900834Z [command]/usr/bin/git checkout --progress --force -B feature/f3-test-failures refs/remotes/origin/feature/f3-test-failures
+2026-09-03T06:44:01.1997906Z Switched to a new branch 'feature/f3-test-failures'
+2026-09-03T06:44:01.2004951Z branch 'feature/f3-test-failures' set up to track 'origin/feature/f3-test-failures'.
+2026-09-03T06:44:01.2010937Z ##[endgroup]
+2026-09-03T06:44:01.2060075Z [command]/usr/bin/git log -1 --format=%H
+2026-09-03T06:44:01.2090409Z b75a30e022453d32b4d9dbb9c3efc99e6bee5000
+2026-09-03T06:44:01.2389638Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:01.2392316Z ##[group]Run actions/setup-python@v5
+2026-09-03T06:44:01.2392832Z with:
+2026-09-03T06:44:01.2393243Z   python-version: 3.11
+2026-09-03T06:44:01.2393699Z   check-latest: false
+2026-09-03T06:44:01.2398068Z   token: ***
+2026-09-03T06:44:01.2398567Z   update-environment: true
+2026-09-03T06:44:01.2399055Z   allow-prereleases: false
+2026-09-03T06:44:01.2399527Z   freethreaded: false
+2026-09-03T06:44:01.2399973Z ##[endgroup]
+2026-09-03T06:44:01.3802301Z ##[group]Installed versions
+2026-09-03T06:44:01.3901214Z (node:2263) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-03T06:44:01.3902930Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-03T06:44:01.3904240Z Successfully set up CPython (3.11.16)
+2026-09-03T06:44:01.3905960Z ##[endgroup]
+2026-09-03T06:44:01.4091869Z ##[group]Run python -m pip install --upgrade pip
+2026-09-03T06:44:01.4092673Z [36;1mpython -m pip install --upgrade pip[0m
+2026-09-03T06:44:01.4093307Z [36;1mpip install -r requirements.txt[0m
+2026-09-03T06:44:01.4160820Z shell: /usr/bin/bash -e {0}
+2026-09-03T06:44:01.4161860Z env:
+2026-09-03T06:44:01.4162816Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4164280Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-03T06:44:01.4166965Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4168871Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4170195Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4171526Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-03T06:44:01.4172611Z ##[endgroup]
+2026-09-03T06:44:03.7774822Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
+2026-09-03T06:44:04.6659702Z ERROR: Ignored the following yanked versions: 2.4.0
+2026-09-03T06:44:04.6662787Z ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python >=3.7,<3.11; 1.21.3 Requires-Python >=3.7,<3.11; 1.21.4 Requires-Python >=3.7,<3.11; 1.21.5 Requires-Python >=3.7,<3.11; 1.21.6 Requires-Python >=3.7,<3.11; 2.5.0 Requires-Python >=3.12; 2.5.0rc1 Requires-Python >=3.12; 2.5.1 Requires-Python >=3.12; 2.5.2 Requires-Python >=3.12
+2026-09-03T06:44:04.6669630Z ERROR: Could not find a version that satisfies the requirement numpy==999.0.0 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.26.1, 1.26.2, 1.26.3, 1.26.4, 2.0.0, 2.0.1, 2.0.2, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6)
+2026-09-03T06:44:04.6674907Z ERROR: No matching distribution found for numpy==999.0.0
+2026-09-03T06:44:04.7186487Z ##[error]Process completed with exit code 1.
+2026-09-03T06:44:04.7348394Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:04.7349747Z Post job cleanup.
+2026-09-03T06:44:04.8195722Z [command]/usr/bin/git version
+2026-09-03T06:44:04.8241213Z git version 2.55.0
+2026-09-03T06:44:04.8282329Z Temporarily overriding HOME='/home/runner/work/_temp/ff843555-2df5-49f9-bf3a-0772395874cb' before making global git config changes
+2026-09-03T06:44:04.8284017Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-03T06:44:04.8290427Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:04.8332272Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-03T06:44:04.8372740Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-03T06:44:04.8640506Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-03T06:44:04.8668050Z http.https://github.com/.extraheader
+2026-09-03T06:44:04.8681511Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-03T06:44:04.8719235Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-03T06:44:04.8991400Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-03T06:44:04.9035837Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-03T06:44:04.9502384Z Cleaning up orphan processes
+2026-09-03T06:44:04.9843950Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+
+--- STEP: dependency-test/10_Post Checkout Repository.txt ---
+﻿2026-09-03T06:44:04.7348363Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:04.7349742Z Post job cleanup.
+2026-09-03T06:44:04.8195624Z [command]/usr/bin/git version
+2026-09-03T06:44:04.8241136Z git version 2.55.0
+2026-09-03T06:44:04.8282287Z Temporarily overriding HOME='/home/runner/work/_temp/ff843555-2df5-49f9-bf3a-0772395874cb' before making global git config changes
+2026-09-03T06:44:04.8284007Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-03T06:44:04.8290408Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:04.8332233Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-03T06:44:04.8372593Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-03T06:44:04.8640435Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-03T06:44:04.8668010Z http.https://github.com/.extraheader
+2026-09-03T06:44:04.8681480Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-03T06:44:04.8719187Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-03T06:44:04.8991309Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-03T06:44:04.9035699Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+
+--- STEP: dependency-test/11_Complete job.txt ---
+﻿2026-09-03T06:44:04.9502348Z Cleaning up orphan processes
+2026-09-03T06:44:04.9843899Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+
+--- STEP: dependency-test/1_Set up job.txt ---
+﻿2026-09-03T06:43:59.7100900Z Current runner version: '2.337.0'
+2026-09-03T06:43:59.7127872Z ##[group]Runner Image Provisioner
+2026-09-03T06:43:59.7128841Z Hosted Compute Agent
+2026-09-03T06:43:59.7129507Z Version: 20260819.586
+2026-09-03T06:43:59.7130133Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+2026-09-03T06:43:59.7130841Z Build Date: 2026-08-18T23:20:18Z
+2026-09-03T06:43:59.7131595Z Worker ID: {bc9cdbad-c55b-4468-83b8-a113145c0b00}
+2026-09-03T06:43:59.7132412Z Azure Region: westus2
+2026-09-03T06:43:59.7133022Z ##[endgroup]
+2026-09-03T06:43:59.7134826Z ##[group]Operating System
+2026-09-03T06:43:59.7135483Z Ubuntu
+2026-09-03T06:43:59.7136101Z 24.04.4
+2026-09-03T06:43:59.7136635Z LTS
+2026-09-03T06:43:59.7137171Z ##[endgroup]
+2026-09-03T06:43:59.7137732Z ##[group]Runner Image
+2026-09-03T06:43:59.7138401Z Image: ubuntu-24.04
+2026-09-03T06:43:59.7139005Z Version: 20260823.283.1
+2026-09-03T06:43:59.7140137Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260823.283/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-03T06:43:59.7141952Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260823.283
+2026-09-03T06:43:59.7142917Z ##[endgroup]
+2026-09-03T06:43:59.7144171Z ##[group]GITHUB_TOKEN Permissions
+2026-09-03T06:43:59.7146504Z Contents: read
+2026-09-03T06:43:59.7147255Z Metadata: read
+2026-09-03T06:43:59.7147861Z Packages: read
+2026-09-03T06:43:59.7148796Z ##[endgroup]
+2026-09-03T06:43:59.7150944Z Secret source: Actions
+2026-09-03T06:43:59.7152105Z Prepare workflow directory
+2026-09-03T06:43:59.7491358Z Prepare all required actions
+2026-09-03T06:43:59.7541021Z Getting action download info
+2026-09-03T06:44:00.1375883Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-03T06:44:00.2816069Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-03T06:44:00.4713929Z Complete job name: dependency-test
+
+--- STEP: dependency-test/2_Checkout Repository.txt ---
+﻿2026-09-03T06:44:00.5613559Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:00.5623375Z ##[group]Run actions/checkout@v4
+2026-09-03T06:44:00.5624162Z with:
+2026-09-03T06:44:00.5624866Z   repository: DhruvHegde/log-generation
+2026-09-03T06:44:00.5629192Z   token: ***
+2026-09-03T06:44:00.5629829Z   ssh-strict: true
+2026-09-03T06:44:00.5630483Z   ssh-user: git
+2026-09-03T06:44:00.5630957Z   persist-credentials: true
+2026-09-03T06:44:00.5631461Z   clean: true
+2026-09-03T06:44:00.5631910Z   sparse-checkout-cone-mode: true
+2026-09-03T06:44:00.5632431Z   fetch-depth: 1
+2026-09-03T06:44:00.5632855Z   fetch-tags: false
+2026-09-03T06:44:00.5633288Z   show-progress: true
+2026-09-03T06:44:00.5633734Z   lfs: false
+2026-09-03T06:44:00.5634139Z   submodules: false
+2026-09-03T06:44:00.5634958Z   set-safe-directory: true
+2026-09-03T06:44:00.5635489Z   allow-unsafe-pr-checkout: false
+2026-09-03T06:44:00.5636399Z ##[endgroup]
+2026-09-03T06:44:00.6715232Z Syncing repository: DhruvHegde/log-generation
+2026-09-03T06:44:00.6717412Z ##[group]Getting Git version info
+2026-09-03T06:44:00.6718278Z Working directory is '/home/runner/work/log-generation/log-generation'
+2026-09-03T06:44:00.6719515Z [command]/usr/bin/git version
+2026-09-03T06:44:00.6855986Z git version 2.55.0
+2026-09-03T06:44:00.6883830Z ##[endgroup]
+2026-09-03T06:44:00.6906289Z Temporarily overriding HOME='/home/runner/work/_temp/881e36f4-4069-4234-b215-1573c04001ec' before making global git config changes
+2026-09-03T06:44:00.6908521Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-03T06:44:00.6912025Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:00.6978376Z Deleting the contents of '/home/runner/work/log-generation/log-generation'
+2026-09-03T06:44:00.6982534Z ##[group]Initializing the repository
+2026-09-03T06:44:00.6988650Z [command]/usr/bin/git init /home/runner/work/log-generation/log-generation
+2026-09-03T06:44:00.7125481Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-03T06:44:00.7127321Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-03T06:44:00.7128936Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-03T06:44:00.7129988Z hint: call:
+2026-09-03T06:44:00.7130701Z hint:
+2026-09-03T06:44:00.7131504Z hint: 	git config --global init.defaultBranch <name>
+2026-09-03T06:44:00.7132288Z hint:
+2026-09-03T06:44:00.7133219Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-03T06:44:00.7134195Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-03T06:44:00.7135575Z hint:
+2026-09-03T06:44:00.7136211Z hint: 	git branch -m <name>
+2026-09-03T06:44:00.7136751Z hint:
+2026-09-03T06:44:00.7137401Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-03T06:44:00.7138536Z Initialized empty Git repository in /home/runner/work/log-generation/log-generation/.git/
+2026-09-03T06:44:00.7152316Z [command]/usr/bin/git remote add origin https://github.com/DhruvHegde/log-generation
+2026-09-03T06:44:00.7200291Z ##[endgroup]
+2026-09-03T06:44:00.7201474Z ##[group]Disabling automatic garbage collection
+2026-09-03T06:44:00.7205247Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-03T06:44:00.7241825Z ##[endgroup]
+2026-09-03T06:44:00.7242890Z ##[group]Setting up auth
+2026-09-03T06:44:00.7250809Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-03T06:44:00.7288967Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-03T06:44:00.7716384Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-03T06:44:00.7765912Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-03T06:44:00.8035601Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-03T06:44:00.8078650Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-03T06:44:00.8345695Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-03T06:44:00.8391519Z ##[endgroup]
+2026-09-03T06:44:00.8392916Z ##[group]Fetching the repository
+2026-09-03T06:44:00.8402647Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b75a30e022453d32b4d9dbb9c3efc99e6bee5000:refs/remotes/origin/feature/f3-test-failures
+2026-09-03T06:44:01.1767963Z From https://github.com/DhruvHegde/log-generation
+2026-09-03T06:44:01.1770057Z  * [new ref]         b75a30e022453d32b4d9dbb9c3efc99e6bee5000 -> origin/feature/f3-test-failures
+2026-09-03T06:44:01.1773465Z ##[endgroup]
+2026-09-03T06:44:01.1775196Z ##[group]Determining the checkout info
+2026-09-03T06:44:01.1777050Z ##[endgroup]
+2026-09-03T06:44:01.1783790Z [command]/usr/bin/git sparse-checkout disable
+2026-09-03T06:44:01.1848575Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-03T06:44:01.1886202Z ##[group]Checking out the ref
+2026-09-03T06:44:01.1900797Z [command]/usr/bin/git checkout --progress --force -B feature/f3-test-failures refs/remotes/origin/feature/f3-test-failures
+2026-09-03T06:44:01.1997845Z Switched to a new branch 'feature/f3-test-failures'
+2026-09-03T06:44:01.2004906Z branch 'feature/f3-test-failures' set up to track 'origin/feature/f3-test-failures'.
+2026-09-03T06:44:01.2010868Z ##[endgroup]
+2026-09-03T06:44:01.2060038Z [command]/usr/bin/git log -1 --format=%H
+2026-09-03T06:44:01.2090376Z b75a30e022453d32b4d9dbb9c3efc99e6bee5000
+
+--- STEP: dependency-test/3_Setup Python.txt ---
+﻿2026-09-03T06:44:01.2389606Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-03T06:44:01.2392311Z ##[group]Run actions/setup-python@v5
+2026-09-03T06:44:01.2392829Z with:
+2026-09-03T06:44:01.2393240Z   python-version: 3.11
+2026-09-03T06:44:01.2393696Z   check-latest: false
+2026-09-03T06:44:01.2398059Z   token: ***
+2026-09-03T06:44:01.2398564Z   update-environment: true
+2026-09-03T06:44:01.2399052Z   allow-prereleases: false
+2026-09-03T06:44:01.2399524Z   freethreaded: false
+2026-09-03T06:44:01.2399971Z ##[endgroup]
+2026-09-03T06:44:01.3802224Z ##[group]Installed versions
+2026-09-03T06:44:01.3901148Z (node:2263) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-03T06:44:01.3902856Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-03T06:44:01.3904234Z Successfully set up CPython (3.11.16)
+2026-09-03T06:44:01.3905940Z ##[endgroup]
+
+--- STEP: dependency-test/4_Install Dependencies.txt ---
+﻿2026-09-03T06:44:01.4091839Z ##[group]Run python -m pip install --upgrade pip
+2026-09-03T06:44:01.4092668Z [36;1mpython -m pip install --upgrade pip[0m
+2026-09-03T06:44:01.4093303Z [36;1mpip install -r requirements.txt[0m
+2026-09-03T06:44:01.4160757Z shell: /usr/bin/bash -e {0}
+2026-09-03T06:44:01.4161842Z env:
+2026-09-03T06:44:01.4162804Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4164254Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-03T06:44:01.4166946Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4168851Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4170184Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-03T06:44:01.4171516Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-03T06:44:01.4172602Z ##[endgroup]
+2026-09-03T06:44:03.7774177Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/site-packages (26.2.1)
+2026-09-03T06:44:04.6659456Z ERROR: Ignored the following yanked versions: 2.4.0
+2026-09-03T06:44:04.6662741Z ERROR: Ignored the following versions that require a different python version: 1.21.2 Requires-Python >=3.7,<3.11; 1.21.3 Requires-Python >=3.7,<3.11; 1.21.4 Requires-Python >=3.7,<3.11; 1.21.5 Requires-Python >=3.7,<3.11; 1.21.6 Requires-Python >=3.7,<3.11; 2.5.0 Requires-Python >=3.12; 2.5.0rc1 Requires-Python >=3.12; 2.5.1 Requires-Python >=3.12; 2.5.2 Requires-Python >=3.12
+2026-09-03T06:44:04.6669517Z ERROR: Could not find a version that satisfies the requirement numpy==999.0.0 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4, 1.25.0, 1.25.1, 1.25.2, 1.26.0, 1.26.1, 1.26.2, 1.26.3, 1.26.4, 2.0.0, 2.0.1, 2.0.2, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.2.0, 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5, 2.2.6, 2.3.0, 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5, 2.4.0rc1, 2.4.1, 2.4.2, 2.4.3, 2.4.4, 2.4.5, 2.4.6)
+2026-09-03T06:44:04.6674863Z ERROR: No matching distribution found for numpy==999.0.0
+2026-09-03T06:44:04.7186428Z ##[error]Process completed with exit code 1.
+
+--- STEP: dependency-test/system.txt ---
+2026-09-03T06:43:56.2750000Z Evaluating dependency-test.if
+2026-09-03T06:43:56.2750000Z Evaluating: success()
+2026-09-03T06:43:56.2750000Z Result: true
+2026-09-03T06:43:56.2760000Z Requested labels: ubuntu-latest
+2026-09-03T06:43:56.2760000Z Job defined at: DhruvHegde/log-generation/.github/workflows/ci.yml@refs/heads/feature/f3-test-failures
+2026-09-03T06:43:56.2760000Z Waiting for a runner to pick up this job...
+2026-09-03T06:43:56.5870000Z Job is about to start running on the hosted runner: GitHub Actions 1000003209
+2026-09-03T06:43:56.5870000Z Job is waiting for a hosted runner to come online.
