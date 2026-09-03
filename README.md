@@ -46,6 +46,10 @@ Category F3 simulates realistic test failures mapping to 8 standard Python runti
 | **`ZeroDivisionError`** | `calculate_division(a, b)` | Passes denominator `b = 0`. |
 | **`FileNotFoundError`** | `read_config_file(path)` | Attempts to open a non-existent configuration file path. |
 
+
+### Mutation Selection Strategy
+Error selection uses **weighted random sampling**. Every error starts with a base weight (`1.0`), and receives a subtle, incremental nudge (`+0.1`) for every run since it was last generated. This ensures true randomness dominates, while providing a mild preference for errors that haven't appeared recently to prevent starvation.
+
 ---
 
 ## 📂 4. Repository Directory Structure (Branch: `feature/f3-test-failures`)
