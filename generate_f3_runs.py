@@ -141,12 +141,20 @@ def sync_and_prepare_labels(clean_f3: bool) -> int:
 
 
 def git_commit_and_push(batch_num: int) -> str:
-    subprocess.run(["git", "add", str(TEST_FILE)], check=True, capture_output=True)
+    # Ensure there is a file change to commit
+    timestamp_comment = f"\n# Trigger batch {batch_num} at {time.time()}\n"
+    with open(TEST_FILE, "a", encoding="utf-8") as f:
+        f.write(timestamp_comment)
+
+    # Add all changes (including deletions from --clean)
+    subprocess.run(["git", "add", "-A"], check=True, capture_output=True)
     commit_msg = f"synthetic(F3): parallel matrix batch run #{batch_num}"
     subprocess.run(["git", "commit", "-m", commit_msg], check=True, capture_output=True)
     
     success = False
     for attempt in range(3):
+        # Ensure we are up to date before pushing
+        subprocess.run(["git", "pull", "--rebase", "origin", GIT_BRANCH], capture_output=True)
         res = subprocess.run(["git", "push", "origin", GIT_BRANCH], capture_output=True, text=True)
         if res.returncode == 0:
             success = True
