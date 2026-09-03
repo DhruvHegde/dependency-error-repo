@@ -25,8 +25,8 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_assertion_failure():
-    """Injected synthetic AssertionError."""
-    expected_status = 200
-    actual_status = 500
-    assert actual_status == expected_status, f"Expected {expected_status}, received {actual_status}"
+def test_index_error():
+    """Injected synthetic IndexError."""
+    from src.app import get_list_item
+    dataset = [10, 20, 30]
+    get_list_item(dataset, 999)
