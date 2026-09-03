@@ -242,7 +242,7 @@ def poll_workflow_run(commit_sha: str, timeout_sec: int = 360) -> dict:
         except requests.exceptions.RequestException:
             time.sleep(5)
 
-        time.sleep(6)
+        time.sleep(2)
 
     raise TimeoutError(f"Workflow polling timed out for commit {commit_sha}")
 
@@ -371,7 +371,7 @@ def main():
             fetch_and_save_artifacts(run_data, selected_error, commit_sha)
 
             print(f"[F3 Progress: {i}/{args.runs}] {selected_error} -> Run ID: {run_data['id']} ({run_data.get('conclusion')})")
-            time.sleep(2)
+            time.sleep(0.5)
 
     finally:
         # Guarantee local workspace and git tree return to clean baseline
