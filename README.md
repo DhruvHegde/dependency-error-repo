@@ -47,8 +47,14 @@ Category F3 simulates realistic test failures mapping to 8 standard Python runti
 | **`FileNotFoundError`** | `read_config_file(path)` | Attempts to open a non-existent configuration file path. |
 
 
-### Mutation Selection Strategy
-Error selection uses **weighted random sampling**. Every error starts with a base weight (`1.0`), and receives a subtle, incremental nudge (`+0.1`) for every run since it was last generated. This ensures true randomness dominates, while providing a mild preference for errors that haven't appeared recently to prevent starvation.
+### 🎲 Weighted Random Selection Engine (Subtle LRU Aging)
+
+To ensure realistic, non-deterministic dataset distribution, error selection is **stochastically randomized** with a gentle Least-Recently-Used (LRU) aging nudge:
+* **Base Weight (`1.0`):** Every error starts with an equal baseline probability.
+* **Subtle Aging Bonus (`+0.1` per run):** For every run an error has not appeared, its weight receives a tiny `+0.1` boost:
+  $$\text{Weight} = 1.0 + (\text{steps\_since\_last\_seen} \times 0.1)$$
+* **True Random Sampling (`random.choices`):** Python samples errors using these dynamically calculated weights.
+* **Benefits:** True randomness remains the dominant selection factor (any error can still repeat or trigger at any time), while ensuring that no single error type gets starved or ignored during large dataset runs.
 
 ---
 
