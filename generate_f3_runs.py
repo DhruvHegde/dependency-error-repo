@@ -1,3 +1,4 @@
+import random
 import argparse
 import csv
 import io
@@ -299,6 +300,40 @@ def fetch_and_save_artifacts(run: dict, error_type: str, commit_sha: str):
         writer.writerow(record)
 
 
+def choose_weighted_random_error(error_keys: list) -> str:
+    """
+    Selects an error type randomly using subtle weighting based on least-recently-used history.
+    - Base weight for every error: 1.0
+    - Tiny boost per run since last seen: +0.1
+    Maintains true randomness as the dominant factor while preventing starvation.
+    """
+    history = []
+    if LABELS_FILE.exists():
+        with open(LABELS_FILE, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if row.get("failure_type") == "F3" and row.get("error_type"):
+                    history.append(row.get("error_type").strip())
+
+    total_runs = len(history)
+    weights = []
+
+    for err in error_keys:
+        if err in history:
+            # Find steps since last occurrence
+            steps_since = total_runs - 1 - (len(history) - 1 - history[::-1].index(err))
+        else:
+            # Never seen yet: treat as max age
+            steps_since = max(total_runs, 10)
+
+        # Base weight 1.0 + subtle 0.1 aging nudge per run
+        weight = 1.0 + (steps_since * 0.1)
+        weights.append(weight)
+
+    selected = random.choices(error_keys, weights=weights, k=1)[0]
+    return selected
+
+
 def main():
     parser = argparse.ArgumentParser(description="Synthetic F3 Test Failure Generation Engine")
     parser.add_argument("--runs", type=int, default=500, help="Total target F3 runs (default: 500)")
@@ -320,7 +355,8 @@ def main():
 
     try:
         for i in range(existing_f3_runs + 1, args.runs + 1):
-            selected_error = error_keys[(i - 1) % len(error_keys)]
+            selected_error = choose_weighted_random_error(error_keys)
+
 
             # Apply mutation
             write_test_mutation(baseline_content, selected_error)
