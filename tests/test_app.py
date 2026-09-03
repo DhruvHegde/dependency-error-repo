@@ -21,3 +21,12 @@ def test_get_dict_value():
 
 def test_assert_positive():
     assert assert_positive(5) == 5
+
+
+# --- SYNTHETIC F3 FAILURE MUTATION ---
+
+def test_assertion_failure():
+    """Injected synthetic AssertionError."""
+    expected_status = 200
+    actual_status = 500
+    assert actual_status == expected_status, f"Expected {expected_status}, received {actual_status}"
