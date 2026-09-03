@@ -25,7 +25,8 @@ def test_assert_positive():
 
 # --- SYNTHETIC F3 FAILURE MUTATION ---
 
-def test_file_not_found_error():
-    """Injected synthetic FileNotFoundError."""
-    from src.app import read_config_file
-    read_config_file("fixtures/non_existent_pipeline_config.json")
+def test_assertion_failure():
+    """Injected synthetic AssertionError."""
+    expected_status = 200
+    actual_status = 500
+    assert actual_status == expected_status, f"Expected {expected_status}, received {actual_status}"
