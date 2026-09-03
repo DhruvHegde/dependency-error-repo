@@ -21,12 +21,3 @@ def test_get_dict_value():
 
 def test_assert_positive():
     assert assert_positive(5) == 5
-
-
-# --- SYNTHETIC F3 FAILURE MUTATION ---
-
-def test_index_error():
-    """Injected synthetic IndexError."""
-    from src.app import get_list_item
-    dataset = [10, 20, 30]
-    get_list_item(dataset, 999)
