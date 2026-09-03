@@ -177,10 +177,9 @@ def poll_workflow_run(commit_sha: str, timeout_sec: int = 360) -> dict:
             res = requests.get(url, headers=HEADERS, params=params, timeout=15)
             if res.status_code == 200:
                 runs = res.json().get("workflow_runs", [])
-                if runs:
-                    run = runs[0]
-                    if run.get("status") == "completed":
-                        return run
+                for r in runs:
+                    if (WORKFLOW_FILE in r.get("path", "") or r.get("name") == "F3 Test Failures CI") and r.get("status") == "completed":
+                        return r
             elif res.status_code in (403, 429):
                 # Rate limit backoff
                 retry_after = int(res.headers.get("Retry-After", 30))
