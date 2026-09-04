@@ -61,17 +61,21 @@ To ensure realistic, non-deterministic dataset distribution, error selection is 
 ## 📂 4. Repository Directory Structure (Branch: `feature/f3-test-failures`)
 
 ```text
-log-generation/
+run_number,dependency,repository,commit_sha,workflow_id,workflow_conclusion,failure_type,stage,validation_status,matched_pattern,log_file,metadata_file,timestamp
 ├── .github/workflows/
-│   ├── ci.yml                 # Legacy CI workflow for F2 (Dependency Errors)
-│   └── f3_test.yml            # Dedicated GitHub Actions CI workflow for Category F3
+* **`run_number`**: GitHub Actions job database ID used to identify the collected result.
+* **`dependency`**: F3 injected error type, such as `TypeError` or `KeyError`.
+* **`repository`**: Target GitHub repository (`DhruvHegde/dependency-error-repo`).
 ├── logs/
 │   ├── F2/                    # Output logs for Category F2
-│   └── F3/                    # Output raw console logs for Category F3 (*.log)
+* **`workflow_conclusion`**: GitHub Actions job conclusion (`failure` or `success`).
 ├── metadata/
-│   ├── F2/                    # Run metadata for Category F2
-│   └── F3/                    # Output workflow JSON metadata for Category F3 (*.json)
-├── src/
+* **`stage`**: Pipeline failure stage (`test` for F3, `build` for F1/F2, `deploy` for F4).
+* **`validation_status`**: Validation result recorded for the collected job.
+* **`matched_pattern`**: Error pattern matched in the matrix job name.
+* **`log_file`**: Repository-relative path to the collected job log.
+* **`metadata_file`**: Repository-relative path to the collected job metadata.
+* **`timestamp`**: Job completion timestamp from GitHub Actions metadata.
 │   └── app.py                 # Baseline testable application functions (F3)
 ├── tests/
 │   └── test_app.py            # Baseline Pytest test suite (F3)

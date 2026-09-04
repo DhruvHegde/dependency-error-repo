@@ -1,13 +1,10 @@
-import random
 import argparse
 import csv
-import io
 import json
 import os
 from pathlib import Path
 import subprocess
 import time
-import zipfile
 from datetime import datetime
 import requests
 from dotenv import load_dotenv
@@ -27,15 +24,19 @@ LABELS_FILE = Path("labels.csv")
 TEST_FILE = Path("tests/test_app.py")
 
 CSV_COLUMNS = [
-    "run_id",
-    "repo_name",
+    "run_number",
+    "dependency",
+    "repository",
     "commit_sha",
     "workflow_id",
-    "stage",
+    "workflow_conclusion",
     "failure_type",
-    "error_type",
-    "status",
-    "duration",
+    "stage",
+    "validation_status",
+    "matched_pattern",
+    "log_file",
+    "metadata_file",
+    "timestamp",
 ]
 
 HEADERS = {
@@ -82,41 +83,16 @@ def sync_and_prepare_labels(clean_f3: bool) -> int:
         reader = csv.reader(f)
         header = next(reader, None)
         
-        # Detect if file was written with old 5-column header or malformed layout
         is_canonical = header == CSV_COLUMNS
 
         for row in reader:
             if not row:
                 continue
 
-            row_dict = {}
             if is_canonical and len(row) == len(CSV_COLUMNS):
                 row_dict = dict(zip(CSV_COLUMNS, row))
-            elif len(row) >= 9:
-                # Realign previously mismatched 9-element rows
-                row_dict = {
-                    "run_id": row[0],
-                    "repo_name": row[1],
-                    "commit_sha": row[2],
-                    "workflow_id": row[3],
-                    "stage": row[4],
-                    "failure_type": row[5],
-                    "error_type": row[6],
-                    "status": row[7],
-                    "duration": row[8],
-                }
-            elif len(row) == 5:
-                row_dict = {
-                    "run_id": row[0],
-                    "repo_name": row[1],
-                    "commit_sha": "",
-                    "workflow_id": "",
-                    "stage": row[4],
-                    "failure_type": row[3],
-                    "error_type": "",
-                    "status": row[2],
-                    "duration": "",
-                }
+            else:
+                row_dict = migrate_legacy_row(row)
 
             is_f3 = (
                 row_dict.get("failure_type") == "F3"
@@ -138,6 +114,44 @@ def sync_and_prepare_labels(clean_f3: bool) -> int:
         writer.writerows(preserved_rows)
 
     return f3_count
+
+
+def migrate_legacy_row(row: list[str]) -> dict[str, str]:
+    """Convert the previous label layouts into the current registry schema."""
+    if len(row) >= 9:
+        run_number, repository, commit_sha, workflow_id, stage = row[:5]
+        failure_type, error_type, status = row[5:8]
+    elif len(row) == 5:
+        run_number, repository, status, failure_type, stage = row
+        commit_sha = ""
+        workflow_id = ""
+        error_type = ""
+    else:
+        return {column: "" for column in CSV_COLUMNS}
+
+    metadata_file = f"metadata/F3/{run_number}.json" if failure_type == "F3" else ""
+    log_file = f"logs/F3/{run_number}.log" if failure_type == "F3" else ""
+    timestamp = ""
+    if metadata_file and Path(metadata_file).exists():
+        with open(metadata_file, "r", encoding="utf-8") as metadata_stream:
+            metadata = json.load(metadata_stream)
+        timestamp = metadata.get("completed_at", "")
+
+    return {
+        "run_number": run_number,
+        "dependency": error_type,
+        "repository": repository,
+        "commit_sha": commit_sha,
+        "workflow_id": workflow_id,
+        "workflow_conclusion": status,
+        "failure_type": failure_type,
+        "stage": stage,
+        "validation_status": status,
+        "matched_pattern": error_type,
+        "log_file": log_file,
+        "metadata_file": metadata_file,
+        "timestamp": timestamp,
+    }
 
 
 def git_commit_and_push(batch_num: int) -> str:
@@ -242,15 +256,19 @@ def fetch_and_save_matrix_artifacts(run: dict, commit_sha: str):
         conclusion = job.get("conclusion", "failure")
 
         record = {
-            "run_id": str(job_id),
-            "repo_name": f"{REPO_OWNER}/{REPO_NAME}",
+            "run_number": str(job_id),
+            "dependency": matched_error,
+            "repository": f"{REPO_OWNER}/{REPO_NAME}",
             "commit_sha": commit_sha,
             "workflow_id": WORKFLOW_FILE,
-            "stage": "test",
+            "workflow_conclusion": conclusion,
             "failure_type": "F3",
-            "error_type": matched_error,
-            "status": conclusion,
-            "duration": duration,
+            "stage": "test",
+            "validation_status": conclusion,
+            "matched_pattern": matched_error,
+            "log_file": str(log_path).replace("\\", "/"),
+            "metadata_file": str(metadata_path).replace("\\", "/"),
+            "timestamp": completed_at_str or "",
         }
 
         with open(LABELS_FILE, "a", newline="", encoding="utf-8") as f:
