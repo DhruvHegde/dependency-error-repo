@@ -227,7 +227,7 @@ def poll_workflow_run(commit_sha: str, timeout_sec: int = 360) -> dict:
             if res.status_code == 200:
                 runs = res.json().get("workflow_runs", [])
                 for r in runs:
-                    if (WORKFLOW_FILE in r.get("path", "") or r.get("name") == "F3 Test Failures CI") and r.get("status") == "completed":
+                    if WORKFLOW_FILE in r.get("path", "") or r.get("name") == "F3 Test Failures CI":
                         return r
             elif res.status_code in (403, 429):
                 # Rate limit backoff
@@ -244,9 +244,7 @@ def poll_workflow_run(commit_sha: str, timeout_sec: int = 360) -> dict:
     raise TimeoutError(f"Workflow polling timed out for commit {commit_sha}")
 
 
-def fetch_and_save_matrix_artifacts(run: dict, commit_sha: str, expected_jobs: int):
-    run_id = run["id"]
-
+def get_matrix_jobs(run_id: int) -> list[dict]:
     jobs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs/{run_id}/jobs"
     jobs = []
     page = 1
@@ -265,9 +263,37 @@ def fetch_and_save_matrix_artifacts(run: dict, commit_sha: str, expected_jobs: i
             break
         page += 1
 
-    jobs = [job for job in jobs if job.get("name", "").startswith("test-f3 (")]
     unique_jobs = {job["id"]: job for job in jobs}
-    jobs = list(unique_jobs.values())
+    return [job for job in unique_jobs.values() if job.get("name", "").startswith("test-f3 (")]
+
+
+def wait_for_matrix_jobs(run: dict, expected_jobs: int, timeout_sec: int = 900) -> None:
+    """Report each completed matrix job while waiting for the batch."""
+    start_time = time.time()
+    reported_jobs = set()
+    print(f"Waiting for {expected_jobs} matrix jobs to complete...")
+
+    while time.time() - start_time < timeout_sec:
+        jobs = get_matrix_jobs(run["id"])
+        completed_jobs = [job for job in jobs if job.get("status") == "completed"]
+        for job in completed_jobs:
+            if job["id"] in reported_jobs:
+                continue
+            reported_jobs.add(job["id"])
+            print(
+                f"  [Progress {len(reported_jobs)}/{expected_jobs}] "
+                f"Job {job['id']} {job.get('name', '')}: {job.get('conclusion', 'unknown')}"
+            )
+
+        if len(completed_jobs) >= expected_jobs:
+            return
+        time.sleep(5)
+
+    raise TimeoutError(f"Matrix jobs timed out for workflow run {run['id']}")
+
+
+def fetch_and_save_matrix_artifacts(run: dict, commit_sha: str, expected_jobs: int):
+    jobs = get_matrix_jobs(run["id"])
     if len(jobs) != expected_jobs:
         raise RuntimeError(f"Expected {expected_jobs} F3 jobs, collected {len(jobs)}")
 
@@ -368,6 +394,7 @@ def main():
             
             commit_sha = git_commit_and_push(batch_num=batch_number)
             run_data = poll_workflow_run(commit_sha)
+            wait_for_matrix_jobs(run_data, expected_jobs=batch_size)
             fetch_and_save_matrix_artifacts(run_data, commit_sha, expected_jobs=batch_size)
 
             print(f"[Batch {batch_number} Complete] Workflow Run ID: {run_data['id']}")
