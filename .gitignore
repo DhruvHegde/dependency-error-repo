@@ -1,5 +1,14 @@
+# Updated .gitignore
 __pycache__/
 *.pyc
 .env
 .pytest_cache/
 state.json
+
+# Ignore other logs and metadata, but specifically allow Category F3
+logs/*
+!logs/F3/
+metadata/*
+!metadata/F3/
+
+labels.csv
