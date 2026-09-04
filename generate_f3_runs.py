@@ -216,6 +216,38 @@ def git_commit_and_push(batch_num: int) -> str:
     return sha.stdout.strip()
 
 
+def current_commit_is_f3_batch() -> bool:
+    result = subprocess.run(
+        ["git", "log", "-1", "--format=%s"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip().startswith("synthetic(F3):")
+
+
+def current_commit_sha() -> str:
+    result = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
+
+
+def latest_labeled_f3_commit() -> str:
+    if not LABELS_FILE.exists():
+        return ""
+    with open(LABELS_FILE, "r", newline="", encoding="utf-8") as stream:
+        commits = [
+            row.get("commit_sha", "")
+            for row in csv.DictReader(stream)
+            if row.get("failure_type") == "F3"
+        ]
+    return commits[-1] if commits else ""
+
+
 def poll_workflow_run(commit_sha: str, timeout_sec: int = 360) -> dict:
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs"
     params = {"head_sha": commit_sha, "branch": GIT_BRANCH}
@@ -249,14 +281,35 @@ def get_matrix_jobs(run_id: int) -> list[dict]:
     jobs = []
     page = 1
     while True:
-        jobs_res = requests.get(
-            jobs_url,
-            headers=HEADERS,
-            params={"per_page": 100, "page": page},
-            timeout=30,
-        )
-        if jobs_res.status_code != 200:
-            raise RuntimeError(f"Failed to fetch jobs for run {run_id} (HTTP {jobs_res.status_code})")
+        jobs_res = None
+        for attempt in range(5):
+            try:
+                jobs_res = requests.get(
+                    jobs_url,
+                    headers=HEADERS,
+                    params={"per_page": 100, "page": page},
+                    timeout=30,
+                )
+                if jobs_res.status_code == 200:
+                    break
+                if jobs_res.status_code in (403, 429):
+                    retry_after = int(jobs_res.headers.get("Retry-After", 30))
+                    print(f"[Jobs API] Backing off for {retry_after}s...")
+                    time.sleep(retry_after)
+                elif jobs_res.status_code >= 500:
+                    delay = 2 ** attempt
+                    print(f"[Jobs API] HTTP {jobs_res.status_code}; retrying in {delay}s...")
+                    time.sleep(delay)
+                else:
+                    break
+            except requests.exceptions.RequestException as exc:
+                delay = 2 ** attempt
+                print(f"[Jobs API] {exc}; retrying in {delay}s...")
+                time.sleep(delay)
+
+        if jobs_res is None or jobs_res.status_code != 200:
+            status = "request error" if jobs_res is None else f"HTTP {jobs_res.status_code}"
+            raise RuntimeError(f"Failed to fetch jobs for run {run_id} ({status})")
         page_jobs = jobs_res.json().get("jobs", [])
         jobs.extend(page_jobs)
         if len(page_jobs) < 100:
@@ -390,9 +443,22 @@ def main():
         while remaining > 0:
             batch_size = min(BATCH_SIZE, remaining)
             print(f"\n[Batch {batch_number}] Triggering randomized matrix run ({batch_size} jobs)...")
-            write_batch_spec(batch_size, seed=None if args.seed is None else args.seed + batch_number)
-            
-            commit_sha = git_commit_and_push(batch_num=batch_number)
+            batch_entries = []
+            if BATCH_FILE.exists():
+                batch_entries = json.loads(BATCH_FILE.read_text(encoding="utf-8")).get("include", [])
+
+            can_resume_batch = (
+                not args.clean
+                and current_commit_is_f3_batch()
+                and current_commit_sha() != latest_labeled_f3_commit()
+                and len(batch_entries) == batch_size
+            )
+            if can_resume_batch:
+                commit_sha = current_commit_sha()
+                print(f"Resuming existing F3 workflow for commit {commit_sha[:12]}...")
+            else:
+                write_batch_spec(batch_size, seed=None if args.seed is None else args.seed + batch_number)
+                commit_sha = git_commit_and_push(batch_num=batch_number)
             run_data = poll_workflow_run(commit_sha)
             wait_for_matrix_jobs(run_data, expected_jobs=batch_size)
             fetch_and_save_matrix_artifacts(run_data, commit_sha, expected_jobs=batch_size)
